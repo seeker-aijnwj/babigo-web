@@ -140,6 +140,38 @@ class AdminDataService {
         .snapshots();
   }
 
+  /// GET ALL PASSENGERS
+  static Stream<QuerySnapshot> streamPassengers() {
+
+    return usersRef
+        .where('role', isEqualTo: 'passenger')
+        .snapshots();
+  }
+
+  /// GET ALL DRIVERS
+  static Stream<QuerySnapshot> streamDrivers() {
+
+    return usersRef
+        .where('role', isEqualTo: 'driver')
+        .snapshots();
+  }
+
+  /// GET ALL FLEET MANAGERS
+  static Stream<QuerySnapshot> streamFleetManagers() {
+
+    return usersRef
+        .where('role', isEqualTo: 'fleet')
+        .snapshots();
+  }
+
+  /// GET ALL SUPPORT
+  static Stream<QuerySnapshot> streamSupport() {
+
+    return usersRef
+        .where('role', isEqualTo: 'support')
+        .snapshots();
+  }
+
   /// UPDATE USER
   static Future<void> updateUser({
     required String id,

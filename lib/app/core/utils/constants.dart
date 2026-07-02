@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../modules/admin_module/database/models/admin/trip_ad.dart';
 import 'colors.dart';
 
 
@@ -53,6 +54,32 @@ class Utils {
 
     }
 
+  }
+
+  static String _getStatusText(TripStatus status) {
+
+    switch (status) {
+
+      case TripStatus.boarding: return "embarquement";
+
+      case TripStatus.cancelled: return "annulé";
+
+      case TripStatus.completed: return "completé";
+
+      case TripStatus.draft: return "brouillon";
+
+      case TripStatus.expired: return "expiré";
+
+      case TripStatus.full: return "terminé";
+
+      case TripStatus.paused: return "à l'arrêt";
+
+      case TripStatus.published: return "programmé";
+
+      case TripStatus.started: return "démarré";
+
+      default: return "tous";
+    }
   }
 
   /// Afficher la raison d'une transaction
@@ -584,6 +611,368 @@ class _BrandBadge extends StatelessWidget {
       ),
     );
   }
+}
+
+class SuperSectionScreen extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final List<SuperAction> actions;
+
+  const SuperSectionScreen({super.key,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.actions,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SuperPage(
+      title: title,
+      subtitle: subtitle,
+      icon: icon,
+      children: [
+        QuickActions(actions: actions),
+        const SizedBox(height: 18),
+        SuperCardsGrid(title: title),
+      ],
+    );
+  }
+}
+
+class _SuperCardData {
+  final String title;
+  final String subtitle;
+  final String meta;
+  final IconData icon;
+  final Color color;
+
+  const _SuperCardData(this.title, this.subtitle, this.meta, this.icon, this.color);
+}
+
+class SuperPage extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final List<Widget> children;
+
+  const SuperPage({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.children,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      final isDesktop = constraints.maxWidth >= 900;
+
+      return SingleChildScrollView(
+        padding: EdgeInsets.all(isDesktop ? 28 : 16),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1180),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              _PageHeader(title: title, subtitle: subtitle, icon: icon),
+              const SizedBox(height: 18),
+              ...children,
+            ]),
+          ),
+        ),
+      );
+    });
+  }
+}
+
+class _PageHeader extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+
+  const _PageHeader({required this.title, required this.subtitle, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(22),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(colors: [Color(0xFF1F6FEB), Color(0xFF5B8DFF)]),
+        borderRadius: BorderRadius.circular(28),
+      ),
+      child: Row(children: [
+        Container(
+          width: 54,
+          height: 54,
+          decoration: BoxDecoration(color: Colors.white.withValues(alpha: .16), borderRadius: BorderRadius.circular(18)),
+          child: Icon(icon, color: Colors.white, size: 30),
+        ),
+        const SizedBox(width: 14),
+        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
+              style: const TextStyle(color: Colors.white, fontSize: 26, height: 1.1, fontWeight: FontWeight.w900)),
+          const SizedBox(height: 6),
+          Text(subtitle, maxLines: 2, overflow: TextOverflow.ellipsis,
+              style: const TextStyle(color: Colors.white70, height: 1.35)),
+        ])),
+      ]),
+    );
+  }
+}
+
+class QuickActions extends StatelessWidget {
+
+  final List<SuperAction> actions;
+  const QuickActions({super.key, required this.actions});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: Utils.cardDecoration(),
+      child: Wrap(
+        spacing: 12,
+        runSpacing: 12,
+        children: actions.map((action) {
+          final color = action.sensitive
+              ? AppColors.danger
+              : AppColors.mainColor;
+
+          return ElevatedButton.icon(
+            onPressed: () {
+              if (action.onTap != null) {
+                action.onTap!();
+              } else if (action.sensitive) {
+                _confirmSensitiveAction(context, action.label);
+              } else {
+                _showAction(context, action.label);
+              }
+            },
+            icon: Icon(action.icon),
+            label: Text(action.label),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: color,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+class MetricGrid extends StatelessWidget {
+
+  final List<MetricData> metrics;
+  const MetricGrid({super.key, required this.metrics});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      final columns = constraints.maxWidth >= 900 ? 4 : constraints.maxWidth >= 560 ? 2 : 1;
+
+      return GridView.builder(
+        itemCount: metrics.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: columns,
+          mainAxisExtent: 118,
+          crossAxisSpacing: 14,
+          mainAxisSpacing: 14,
+        ),
+        itemBuilder: (context, index) {
+          final metric = metrics[index];
+
+          return Container(
+            padding: const EdgeInsets.all(16),
+            decoration: Utils.cardDecoration(),
+            child: Row(children: [
+              CircleAvatar(backgroundColor: metric.color.withValues(alpha: .1), child: Icon(metric.icon, color: metric.color)),
+              const SizedBox(width: 12),
+              Expanded(child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(metric.value, maxLines: 1, overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Color(0xFF0F172A), fontSize: 22, fontWeight: FontWeight.w900)),
+                const SizedBox(height: 4),
+                Text(metric.label, maxLines: 1, overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Color(0xFF64748B))),
+              ])),
+            ]),
+          );
+        },
+      );
+    });
+  }
+}
+
+class SuperCardsGrid extends StatelessWidget {
+
+  final String title;
+  const SuperCardsGrid({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+
+    const cards = [
+      _SuperCardData(
+          "Contrôle complet", "Accès lecture et action sur ce module.", "Super admin", Icons.verified_user, AppColors.mainColor),
+      _SuperCardData(
+          "Actions sensibles", "Toute opération critique doit être confirmée.", "Protégé", Icons.lock, AppColors.warning),
+      _SuperCardData(
+          "Journalisation", "Chaque modification est destinée au journal d'audit.", "Audit", Icons.manage_history, AppColors.success),
+    ];
+
+    return LayoutBuilder(builder: (context, constraints) {
+      final columns = constraints.maxWidth >= 900 ? 3 : constraints.maxWidth >= 600 ? 2 : 1;
+
+      return GridView.builder(
+        itemCount: cards.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: columns,
+          mainAxisExtent: 176,
+          crossAxisSpacing: 14,
+          mainAxisSpacing: 14,
+        ),
+        itemBuilder: (context, index) {
+          final card = cards[index];
+
+          return Container(
+            padding: const EdgeInsets.all(18),
+            decoration: Utils.cardDecoration(),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(children: [
+                CircleAvatar(backgroundColor: card.color.withValues(alpha: .1), child: Icon(card.icon, color: card.color)),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(color: card.color.withValues(alpha: .1), borderRadius: BorderRadius.circular(99)),
+                  child: Text(card.meta, style: TextStyle(color: card.color, fontSize: 12, fontWeight: FontWeight.w800)),
+                ),
+              ]),
+              const Spacer(),
+              Text("$title · ${card.title}", maxLines: 1, overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Color(0xFF0F172A), fontSize: 17, fontWeight: FontWeight.w900)),
+              const SizedBox(height: 8),
+              Text(card.subtitle, maxLines: 2, overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Color(0xFF64748B), height: 1.35)),
+            ]),
+          );
+        },
+      );
+    });
+  }
+}
+
+class NoticeBox extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final bool danger;
+
+  const NoticeBox({
+    super.key,
+    required this.icon,
+    required this.text,
+    this.danger = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final color = danger
+        ? AppColors.danger
+        : AppColors.warning;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: .08),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: color.withValues(alpha: .25)),
+      ),
+      child: Row(children: [
+        Icon(icon, color: color),
+        const SizedBox(width: 10),
+        Expanded(
+            child: Text(
+                text,
+                style: TextStyle(
+                    color: color,
+                    fontWeight: FontWeight.w800
+                )
+            )
+        ),
+      ]),
+    );
+  }
+}
+
+class SuperAction {
+  final String label;
+  final IconData icon;
+  final VoidCallback? onTap;
+  final bool sensitive;
+
+  const SuperAction(
+      this.label,
+      this.icon, {
+        this.onTap,
+        this.sensitive = false,
+      });
+}
+
+Future<void> _confirmSensitiveAction(BuildContext context, String label) async {
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text("Action sensible"),
+      content: Text("Confirmer l'action : $label ?"),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(context, false), child: const Text("Annuler")),
+        ElevatedButton(onPressed: () => Navigator.pop(context, true), child: const Text("Confirmer")),
+      ],
+    ),
+  );
+
+  if (confirmed == true && context.mounted) {
+    _showAction(context, label);
+  }
+}
+
+void _showAction(BuildContext context, String label) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text("$label : action à connecter"),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.black87,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+    ),
+  );
+}
+
+class SuperMenuItem {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final IconData selectedIcon;
+
+  const SuperMenuItem(this.title, this.subtitle, this.icon, this.selectedIcon);
+}
+
+class MetricData {
+  final String value;
+  final String label;
+  final IconData icon;
+  final Color color;
+
+  const MetricData(this.value, this.label, this.icon, this.color);
 }
 
 class VehicleUtils {

@@ -8,10 +8,10 @@ import '../database/models/mocks/mock_ticket.dart';
 import '../database/models/trip_ad.dart';
 import '../database/services/mock_data_service.dart';
 import '../screens/dashboard/dashboard_view.dart';
-import '../screens/finance/finance_view.dart';
-import '../screens/users/user_view.dart';
+import '../widgets/finance_view.dart';
+import '../widgets/user_view.dart';
 import '../screens/settings/settings_view.dart';
-import '../screens/booking/trip_view.dart';
+import '../widgets/trip_view.dart';
 
 
 class AdminLayout extends StatefulWidget {
@@ -46,7 +46,7 @@ class _AdminLayoutState extends State<AdminLayout> {
     const DashboardView(),
 
     // Groupes et acteurs
-    const UserView(),
+    const UserListWidget(),
 
     // Activités et logique métier
     const TripView(),

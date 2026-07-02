@@ -1,3 +1,7 @@
+import 'package:babigo/modules/admin_module/widgets/finance_view.dart';
+import 'package:babigo/modules/admin_module/widgets/fleet_manager_view.dart';
+import 'package:babigo/modules/admin_module/widgets/support_view.dart';
+import 'package:babigo/modules/admin_module/widgets/trip_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +10,12 @@ import 'package:babigo/modules/admin_module/database/models/admin/utilisateur.da
 import '../../../../app/core/utils/colors.dart';
 import '../../../auth_module/screens/signin_screen.dart';
 import '../../database/services/auth_service.dart';
+import '../../widgets/announce_view.dart';
+import '../../widgets/driver_view.dart';
+import '../../widgets/passenger_view.dart';
+import '../../widgets/user_view.dart';
+import '../../widgets/vehicle_view.dart';
+import 'admins/admin_super_dashboard_screen.dart';
 
 class AdminSuperAdminMainScreen extends StatefulWidget {
   final Utilisateur? selectedUser;
@@ -32,8 +42,6 @@ class AdminSuperAdminMainScreenState extends State<AdminSuperAdminMainScreen> {
     _SuperMenuItem(
         "Utilisateurs", "Tous les comptes", Icons.people_alt_outlined, Icons.people_alt),
     _SuperMenuItem(
-        "Rôles", "Droits et accès", Icons.admin_panel_settings_outlined, Icons.admin_panel_settings),
-    _SuperMenuItem(
         "Passagers", "Suivi passagers", Icons.person_outline, Icons.person),
     _SuperMenuItem(
         "Conducteurs", "Activité conducteur", Icons.drive_eta_outlined, Icons.drive_eta),
@@ -42,9 +50,9 @@ class AdminSuperAdminMainScreenState extends State<AdminSuperAdminMainScreen> {
     _SuperMenuItem(
         "Support", "Agents et tickets", Icons.support_agent_outlined, Icons.support_agent),
     _SuperMenuItem(
-        "Trajets", "Réservations", Icons.route_outlined, Icons.route),
-    _SuperMenuItem(
         "Annonces", "Modération", Icons.campaign_outlined, Icons.campaign),
+    _SuperMenuItem(
+        "Trajets", "Réservations", Icons.route_outlined, Icons.route),
     _SuperMenuItem(
         "Véhicules", "Registre flotte", Icons.directions_car_outlined, Icons.directions_car),
     _SuperMenuItem(
@@ -73,87 +81,122 @@ class AdminSuperAdminMainScreenState extends State<AdminSuperAdminMainScreen> {
 
   List<Widget> _createScreens() {
     return [
-      _SuperDashboardScreen(onNavigate: navigateToTab),
-      _section("Utilisateurs", "Créer, rechercher, suspendre, restaurer et contrôler tous les comptes.", Icons.people_alt, [
-        _SuperAction("Créer utilisateur", Icons.person_add),
-        _SuperAction("Rechercher", Icons.search),
-        _SuperAction("Suspendre compte", Icons.block, sensitive: true),
-      ]),
+
+      AdminSuperDashboardScreen(onNavigate: navigateToTab),
+
+      UserListWidget(),
+
+      /*
+
       _section("Rôles et permissions", "Attribuer les rôles, gérer les accès et protéger les privilèges sensibles.", Icons.admin_panel_settings, [
         _SuperAction("Créer rôle", Icons.add_moderator),
         _SuperAction("Matrice d'accès", Icons.grid_view),
         _SuperAction("Révoquer privilège", Icons.lock_reset, sensitive: true),
       ]),
+
       _section("Passagers", "Consulter réservations, wallets, litiges et activité passager.", Icons.person, [
         _SuperAction("Voir passager", Icons.visibility),
         _SuperAction("Wallet passager", Icons.account_balance_wallet),
         _SuperAction("Résoudre litige", Icons.balance),
       ]),
+
       _section("Conducteurs", "Valider profils, documents, annonces, performances et restrictions.", Icons.drive_eta, [
         _SuperAction("Valider conducteur", Icons.verified),
         _SuperAction("Voir documents", Icons.folder_copy),
         _SuperAction("Bloquer conducteur", Icons.block, sensitive: true),
       ]),
+
       _section("Gestionnaires de flotte", "Gérer parcs, véhicules, conducteurs liés, documents et revenus.", Icons.business, [
         _SuperAction("Créer parc", Icons.add_business),
         _SuperAction("Affectations", Icons.swap_horiz),
         _SuperAction("Audit flotte", Icons.fact_check),
       ]),
+
       _section("Support", "Superviser agents support, tickets, escalades et qualité de réponse.", Icons.support_agent, [
         _SuperAction("Créer agent", Icons.person_add_alt),
         _SuperAction("Assigner tickets", Icons.assignment_ind),
         _SuperAction("Retirer accès", Icons.no_accounts, sensitive: true),
       ]),
+
+      _section("Annonces", "Modérer, publier, masquer ou supprimer les annonces problématiques.", Icons.campaign, [
+        _SuperAction("Publier", Icons.publish),
+        _SuperAction("Masquer", Icons.visibility_off),
+        _SuperAction("Supprimer annonce", Icons.delete, sensitive: true),
+      ]),*/
+
+      PassengerListWidget(),
+
+      DriverListWidget(),
+
+      FleetManagerListWidget(),
+
+      SupportListWidget(),
+
+      AnnounceView(),
+
+      TripView(),
+
+      VehicleView(),
+
+      /*
+
       _section("Trajets et réservations", "Superviser trajets actifs, annulations, réservations bloquées et historique.", Icons.route, [
         _SuperAction("Suivre trajet", Icons.location_searching),
         _SuperAction("Annuler réservation", Icons.cancel, sensitive: true),
         _SuperAction("Forcer résolution", Icons.task_alt, sensitive: true),
       ]),
-      _section("Annonces", "Modérer, publier, masquer ou supprimer les annonces problématiques.", Icons.campaign, [
-        _SuperAction("Publier", Icons.publish),
-        _SuperAction("Masquer", Icons.visibility_off),
-        _SuperAction("Supprimer annonce", Icons.delete, sensitive: true),
-      ]),
+
       _section("Véhicules", "Registre complet des véhicules, assurances, états et maintenances.", Icons.directions_car, [
         _SuperAction("Ajouter véhicule", Icons.add_road),
         _SuperAction("Vérifier assurance", Icons.health_and_safety),
         _SuperAction("Retirer véhicule", Icons.remove_circle, sensitive: true),
       ]),
+
+      _section("Paiements et portefeuilles", "Contrôler transactions, retraits, remboursements, commissions et soldes gelés.", Icons.account_balance_wallet, [
+        _SuperAction("Approuver retrait", Icons.check_circle, sensitive: true),
+        _SuperAction("Rembourser", Icons.request_quote, sensitive: true),
+        _SuperAction("Voir transactions", Icons.receipt_long),
+      ]), */
+
       _section("Documents et KYC", "Valider, refuser, signaler et suivre les pièces sensibles.", Icons.folder_copy, [
         _SuperAction("Valider document", Icons.verified_user),
         _SuperAction("Demander correction", Icons.edit_note),
         _SuperAction("Marquer fraude", Icons.flag, sensitive: true),
       ]),
-      _section("Paiements et portefeuilles", "Contrôler transactions, retraits, remboursements, commissions et soldes gelés.", Icons.account_balance_wallet, [
-        _SuperAction("Approuver retrait", Icons.check_circle, sensitive: true),
-        _SuperAction("Rembourser", Icons.request_quote, sensitive: true),
-        _SuperAction("Voir transactions", Icons.receipt_long),
-      ]),
+
+
+      FinanceView(),
+
       _section("Tarifs et commissions", "Configurer prix, promotions, commissions, zones et règles business.", Icons.price_change, [
         _SuperAction("Modifier commission", Icons.percent, sensitive: true),
         _SuperAction("Créer promo", Icons.local_offer),
         _SuperAction("Zones tarifaires", Icons.map),
       ]),
+
       _section("Incidents et sécurité", "Gérer signalements, urgences, fraudes, bannissements et escalades critiques.", Icons.shield, [
         _SuperAction("Ouvrir incident", Icons.add_alert),
         _SuperAction("Contacter sécurité", Icons.security),
         _SuperAction("Bannir compte", Icons.gpp_bad, sensitive: true),
       ]),
+
       _section("Messages et campagnes", "Envoyer notifications ciblées ou globales et gérer les modèles système.", Icons.notifications, [
         _SuperAction("Campagne globale", Icons.campaign, sensitive: true),
         _SuperAction("Message ciblé", Icons.send),
         _SuperAction("Modèles", Icons.quickreply),
       ]),
+
       _section("Analytics et rapports", "Suivre croissance, revenus, activité, incidents et performances opérationnelles.", Icons.analytics, [
         _SuperAction("Exporter rapport", Icons.download),
         _SuperAction("Filtrer période", Icons.tune),
         _SuperAction("KPI revenus", Icons.show_chart),
       ]),
+
       _section("Paramètres système", "Configurer plateforme, pays, villes, intégrations, feature flags et règles globales.", Icons.settings, [
         _SuperAction("Feature flags", Icons.toggle_on),
         _SuperAction("Intégrations", Icons.api),
         _SuperAction("Maintenance système", Icons.build, sensitive: true),
       ]),
+
       _section("Journal d'audit", "Consulter toutes les actions sensibles effectuées par les administrateurs.", Icons.manage_history, [
         _SuperAction("Rechercher logs", Icons.search),
         _SuperAction("Exporter audit", Icons.download),
@@ -415,46 +458,6 @@ class AdminSuperAdminMainScreenState extends State<AdminSuperAdminMainScreen> {
   }
 }
 
-class _SuperDashboardScreen extends StatelessWidget {
-  final ValueChanged<int> onNavigate;
-
-  const _SuperDashboardScreen({required this.onNavigate});
-
-  @override
-  Widget build(BuildContext context) {
-    return _SuperPage(
-      title: "Centre de contrôle BabiGO",
-      subtitle: "Supervision complète de la plateforme, des utilisateurs, des paiements et de la sécurité.",
-      icon: Icons.dashboard,
-      children: [
-        const _MetricGrid(metrics: [
-          _MetricData(
-              "18 420", "Utilisateurs", Icons.people_alt, AppColors.mainColor),
-          _MetricData(
-              "1 286", "Conducteurs", Icons.drive_eta, AppColors.success),
-          _MetricData(
-              "72", "Incidents ouverts", Icons.shield, AppColors.danger),
-          _MetricData(
-              "9.8M", "F CFA revenus", Icons.payments, AppColors.purple),
-        ]),
-        const SizedBox(height: 18),
-        _QuickActions(actions: [
-          _SuperAction("Utilisateurs", Icons.people_alt, onTap: () => onNavigate(1)),
-          _SuperAction("Paiements", Icons.account_balance_wallet, onTap: () => onNavigate(11)),
-          _SuperAction("Incidents", Icons.shield, onTap: () => onNavigate(13)),
-          _SuperAction("Système", Icons.settings, onTap: () => onNavigate(16), sensitive: true),
-        ]),
-        const SizedBox(height: 18),
-        const _NoticeBox(
-          icon: Icons.privacy_tip,
-          text: "Mode super administrateur : suppression, remboursements, rôles, paramètres système et audits sont accessibles ici.",
-          danger: true,
-        ),
-      ],
-    );
-  }
-}
-
 class _SuperSectionScreen extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -598,50 +601,6 @@ class _QuickActions extends StatelessWidget {
   }
 }
 
-class _MetricGrid extends StatelessWidget {
-  final List<_MetricData> metrics;
-
-  const _MetricGrid({required this.metrics});
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final columns = constraints.maxWidth >= 900 ? 4 : constraints.maxWidth >= 560 ? 2 : 1;
-
-      return GridView.builder(
-        itemCount: metrics.length,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: columns,
-          mainAxisExtent: 118,
-          crossAxisSpacing: 14,
-          mainAxisSpacing: 14,
-        ),
-        itemBuilder: (context, index) {
-          final metric = metrics[index];
-
-          return Container(
-            padding: const EdgeInsets.all(16),
-            decoration: _cardDecoration(),
-            child: Row(children: [
-              CircleAvatar(backgroundColor: metric.color.withValues(alpha: .1), child: Icon(metric.icon, color: metric.color)),
-              const SizedBox(width: 12),
-              Expanded(child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(metric.value, maxLines: 1, overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Color(0xFF0F172A), fontSize: 22, fontWeight: FontWeight.w900)),
-                const SizedBox(height: 4),
-                Text(metric.label, maxLines: 1, overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Color(0xFF64748B))),
-              ])),
-            ]),
-          );
-        },
-      );
-    });
-  }
-}
-
 class _SuperCardsGrid extends StatelessWidget {
   final String title;
 
@@ -701,48 +660,6 @@ class _SuperCardsGrid extends StatelessWidget {
   }
 }
 
-class _NoticeBox extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  final bool danger;
-
-  const _NoticeBox({
-    required this.icon,
-    required this.text,
-    this.danger = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final color = danger
-        ? AppColors.danger
-        : AppColors.warning;
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: .08),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: color.withValues(alpha: .25)),
-      ),
-      child: Row(children: [
-        Icon(icon, color: color),
-        const SizedBox(width: 10),
-        Expanded(
-            child: Text(
-                text,
-                style: TextStyle(
-                    color: color,
-                    fontWeight: FontWeight.w800
-                )
-            )
-        ),
-      ]),
-    );
-  }
-}
-
 Future<void> _confirmSensitiveAction(BuildContext context, String label) async {
   final confirmed = await showDialog<bool>(
     context: context,
@@ -793,15 +710,6 @@ class _SuperMenuItem {
   final IconData selectedIcon;
 
   const _SuperMenuItem(this.title, this.subtitle, this.icon, this.selectedIcon);
-}
-
-class _MetricData {
-  final String value;
-  final String label;
-  final IconData icon;
-  final Color color;
-
-  const _MetricData(this.value, this.label, this.icon, this.color);
 }
 
 class _SuperCardData {

@@ -111,6 +111,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
       case 'super_admin':
       case 'superadmin':
       case 'admin_super':
+      case 'admin':
         screen = const AdminSuperAdminMainScreen();
         break;
 

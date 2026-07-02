@@ -559,9 +559,10 @@ class AuthService {
 
   static Future<void> signOut() async {
     try {
-      await GoogleSignIn.instance.signOut();
 
       await Utils.auth.signOut();
+
+      await GoogleSignIn.instance.signOut();
 
       // Apple Sign-In
       // Gestion ultérieure si nécessaire

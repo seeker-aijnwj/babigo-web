@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../app/core/utils/colors.dart';
+import '../../../auth_module/screens/signin_screen.dart';
 import '../../database/models/admin/utilisateur.dart';
+import '../../database/services/auth_service.dart';
 import 'passengers/admin_passenger_home_screen.dart';
 import 'passengers/admin_passenger_dashboard_screen.dart';
 import 'passengers/admin_passenger_notifications_screen.dart';
@@ -124,14 +127,30 @@ class AdminPassengerMainScreenState extends State<AdminPassengerMainScreen> {
                   color: const Color(0xFFF4F7FE),
                   borderRadius: BorderRadius.circular(18),
                 ),
-                child: const Text(
-                  "Babigo Passenger",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFF64748B),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
+                child: TextButton(
+                  child: Text("Déconnexion",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.danger,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                    ),
                   ),
+                  onPressed: () async {
+
+                    await AuthService.signOut();
+
+                    if (!context.mounted) return;
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                        const SignInScreen(),
+                      ),
+                          (_) => false,
+                    );
+                  },
                 ),
               ),
             ),
