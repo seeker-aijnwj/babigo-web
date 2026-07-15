@@ -1,26 +1,42 @@
-import { collection, getDocs } from "firebase/firestore";
+import {
+    collection,
+    onSnapshot
+} from "firebase/firestore";
+
 import { db } from "./firebase";
 
 const USERS_COLLECTION = "users";
 
-export async function getUsers() {
-  
-  try {
+export function subscribeToUsers(callback) {
 
-    const snapshot = await getDocs(
-      collection(db, USERS_COLLECTION)
+    return onSnapshot(
+
+        collection(db, USERS_COLLECTION),
+
+        (snapshot) => {
+
+            console.log("Nombre de documents :", snapshot.size);
+
+            const users = snapshot.docs.map(doc => ({
+
+                id: doc.id,
+
+                ...doc.data()
+
+            }));
+
+            console.log(users);
+
+            callback(users);
+
+        },
+
+        (error) => {
+
+            console.error(error);
+
+        }
+
     );
 
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-  } catch (error) {
-
-    console.error(error);
-
-    return [];
-  }
-  
 }

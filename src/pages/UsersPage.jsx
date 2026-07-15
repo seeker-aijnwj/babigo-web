@@ -1,90 +1,85 @@
 import { useEffect, useState } from "react";
 
-import { getUsers } from "../services/userService";
+import DashboardLayout from "../components/layouts/DashboardLayout";
+
+import UserList from "../components/users/UserList";
+import UserDetails from "../components/users/UserDetails";
+
+import { subscribeToUsers } from "../services/userService";
 
 export default function UsersPage() {
 
+    // ===============================
+    // ETATS
+    // ===============================
+
     const [users, setUsers] = useState([]);
 
-    const [loading, setLoading] = useState(true);
+    const [selectedUser, setSelectedUser] = useState(null);
+
+    // ===============================
+    // CHARGEMENT DES UTILISATEURS
+    // ===============================
 
     useEffect(() => {
 
-        async function loadUsers() {
+        const unsubscribe = subscribeToUsers((firebaseUsers) => {
 
-            const result = await getUsers();
+            console.log("Utilisateurs reçus :", firebaseUsers);
 
-            setUsers(result);
+            setUsers(firebaseUsers);
 
-            setLoading(false);
+            // Sélection automatique du premier utilisateur
+            if (firebaseUsers.length > 0) {
 
-        }
+                setSelectedUser((currentUser) => {
 
-        loadUsers();
+                    if (currentUser) {
+                        return currentUser;
+                    }
+
+                    return firebaseUsers[0];
+
+                });
+
+            }
+
+        });
+
+        // Nettoyage de l'écoute Firestore
+        return () => unsubscribe();
 
     }, []);
 
-    if (loading) {
-
-        return <h2>Chargement...</h2>;
-
-    }
+    // ===============================
+    // AFFICHAGE
+    // ===============================
 
     return (
 
-        <div>
+        <DashboardLayout>
 
-            <h1>Utilisateurs</h1>
+            <div
+                style={{
+                    display: "flex",
+                    height: "calc(100vh - 70px)",
+                    background: "#f5f7fa"
+                }}
+            >
 
-            <p>{users.length} utilisateur(s)</p>
+                <UserList
+                    users={users}
+                    selectedUser={selectedUser}
+                    onSelectUser={setSelectedUser}
+                />
 
-            {
-                users.map(user => (
+                <UserDetails
+                    user={selectedUser}
+                />
 
-                    <div
-                        key={user.id}
-                        style={{
-                            padding:20,
-                            marginBottom:10,
-                            border:"1px solid #ddd",
-                            borderRadius:10
-                        }}
-                    >
+            </div>
 
-                        <h3>
-
-                            {user.firstName || user.prenom}
-
-                            {" "}
-
-                            {user.lastName || user.nom}
-
-                        </h3>
-
-                        <p>
-
-                            {user.email}
-
-                        </p>
-
-                        <p>
-
-                            {user.phone || user.numero}
-
-                        </p>
-
-                        <p>
-
-                            {user.role}
-
-                        </p>
-
-                    </div>
-
-                ))
-            }
-
-        </div>
+        </DashboardLayout>
 
     );
 
