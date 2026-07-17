@@ -7,75 +7,139 @@ import UserDetails from "../components/users/UserDetails";
 
 import { subscribeToUsers } from "../services/userService";
 
+import useResponsive from "../hooks/useResponsive";
+
+import "../components/users/users.css";
+
 export default function UsersPage() {
 
-    // ===============================
-    // ETATS
-    // ===============================
+    const { isMobile } = useResponsive();
 
     const [users, setUsers] = useState([]);
 
     const [selectedUser, setSelectedUser] = useState(null);
 
-    // ===============================
-    // CHARGEMENT DES UTILISATEURS
-    // ===============================
+    const [showDetails, setShowDetails] = useState(false);
+
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
         const unsubscribe = subscribeToUsers((firebaseUsers) => {
 
-            console.log("Utilisateurs reçus :", firebaseUsers);
-
             setUsers(firebaseUsers);
 
-            // Sélection automatique du premier utilisateur
-            if (firebaseUsers.length > 0) {
+            setSelectedUser((currentUser) => {
 
-                setSelectedUser((currentUser) => {
+                if (!firebaseUsers.length) {
 
-                    if (currentUser) {
-                        return currentUser;
-                    }
+                    return null;
+
+                }
+
+                if (!currentUser) {
 
                     return firebaseUsers[0];
 
-                });
+                }
 
-            }
+                const updatedUser = firebaseUsers.find(
+
+                    user => user.id === currentUser.id
+
+                );
+
+                return updatedUser || firebaseUsers[0];
+
+            });
+
+            setLoading(false);
 
         });
 
-        // Nettoyage de l'écoute Firestore
         return () => unsubscribe();
 
     }, []);
 
-    // ===============================
-    // AFFICHAGE
-    // ===============================
+    function handleSelectUser(user) {
+
+        setSelectedUser(user);
+
+        if (isMobile) {
+
+            setShowDetails(true);
+
+        }
+
+    }
+
+    function handleBack() {
+
+        setShowDetails(false);
+
+    }
 
     return (
 
         <DashboardLayout>
 
-            <div
-                style={{
-                    display: "flex",
-                    height: "calc(100vh - 90px)",
-                    background: "#f5f7fa"
-                }}
-            >
+            <div className="users-page">
 
-                <UserList
-                    users={users}
-                    selectedUser={selectedUser}
-                    onSelectUser={setSelectedUser}
-                />
+                {
 
-                <UserDetails
-                    user={selectedUser}
-                />
+                    loading ? (
+
+                        <div className="users-loading">
+
+                            Chargement des utilisateurs...
+
+                        </div>
+
+                    ) : (
+
+                        <>
+
+                            {
+
+                                (!isMobile || !showDetails) && (
+
+                                    <UserList
+
+                                        users={users}
+
+                                        selectedUser={selectedUser}
+
+                                        onSelectUser={handleSelectUser}
+
+                                    />
+
+                                )
+
+                            }
+
+                            {
+
+                                (!isMobile || showDetails) && (
+
+                                    <UserDetails
+
+                                        user={selectedUser}
+
+                                        isMobile={isMobile}
+
+                                        onBack={handleBack}
+
+                                    />
+
+                                )
+
+                            }
+
+                        </>
+
+                    )
+
+                }
 
             </div>
 

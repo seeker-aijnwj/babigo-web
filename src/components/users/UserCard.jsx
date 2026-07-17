@@ -72,7 +72,7 @@ export default function UserCard({
                 
                 <small>
 
-                    {user.phone || user.numero}
+                    {user.email}
 
                 </small>
 

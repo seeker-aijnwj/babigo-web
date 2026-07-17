@@ -1,8 +1,18 @@
+// src/components/users/UserDetails.jsx
+
 import boyAvatar from '../../assets/images/avatars/boy.jpg';
 import girlAvatar from '../../assets/images/avatars/girl.jpg';
 import "./users.css";
 
-export default function UserDetails({ user }) {
+export default function UserDetails({
+
+    user,
+
+    isMobile = false,
+
+    onBack
+
+}) {
 
     if (!user) {
 
@@ -12,10 +22,16 @@ export default function UserDetails({ user }) {
 
                 <div className="user-details-empty">
 
-                    <h2>Aucun utilisateur sélectionné</h2>
+                    <h2>
+
+                        Aucun utilisateur sélectionné
+
+                    </h2>
 
                     <p>
-                        Sélectionnez un utilisateur dans la liste de gauche.
+
+                        Sélectionnez un utilisateur dans la liste.
+
                     </p>
 
                 </div>
@@ -27,36 +43,82 @@ export default function UserDetails({ user }) {
     }
 
     const firstName = user.firstName || user.prenom || "";
-    const lastName = user.lastName || user.nom || "";
-    const phone = user.phone || user.numero || "";
-    const photo = user.photoUrl || user.avatar || "";
-    const status = user.status || user.accountStatus || "Inconnu";
 
-    const fullName = `${firstName} ${lastName}`.trim();
+    const lastName = user.lastName || user.nom || "";
+
+    const fullName = `${firstName} ${lastName}`.trim() || "Utilisateur";
+
+    const photo = user.photoUrl || user.avatar || "";
+
+    const role = user.role || "Utilisateur";
+
+    const phone = user.phone || user.numero || "Non renseigné";
+
+    const email = user.email || "Non renseigné";
+
+    const city = user.city || user.ville || "Non renseignée";
+
+    const wallet = user.walletBalance ?? user.wallet ?? 0;
+
+    const rating = user.rating ?? 0;
+
+    const trips = user.totalTrips ?? 0;
+
+    const status = user.status || "Actif";
+
+    const initials = fullName
+        .split(" ")
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(word => word.charAt(0).toUpperCase())
+        .join("");
 
     return (
 
         <section className="user-details">
+
+            {
+
+                isMobile && (
+
+                    <div className="user-details-mobile-header">
+
+                        <button
+
+                            className="back-button"
+
+                            onClick={onBack}
+
+                        >
+
+                            ← Retour
+
+                        </button>
+
+                    </div>
+
+                )
+
+            }
 
             <div className="user-profile">
 
                 <div className="profile-avatar">
 
                     {
-                        photo ?
+
+                        photo ? (
 
                             <img
-                                src={user.avatar === "boy" ? boyAvatar : girlAvatar }
+                                src={photo === 'boy' ? boyAvatar : girlAvatar}
                                 alt={fullName}
                             />
 
-                            :
+                        ) : (
 
-                            <span>
+                            initials
 
-                                {fullName.charAt(0).toUpperCase()}
-
-                            </span>
+                        )
 
                     }
 
@@ -66,7 +128,7 @@ export default function UserDetails({ user }) {
 
                     <h2>{fullName}</h2>
 
-                    <p>{user.email}</p>
+                    <p>{role}</p>
 
                 </div>
 
@@ -84,9 +146,9 @@ export default function UserDetails({ user }) {
 
                 <div className="detail-card">
 
-                    <label>Rôle</label>
+                    <label>Email</label>
 
-                    <span>{user.role}</span>
+                    <span>{email}</span>
 
                 </div>
 
@@ -94,15 +156,7 @@ export default function UserDetails({ user }) {
 
                     <label>Ville</label>
 
-                    <span>{user.city}</span>
-
-                </div>
-
-                <div className="detail-card">
-
-                    <label>Commune</label>
-
-                    <span>{user.district}</span>
+                    <span>{city}</span>
 
                 </div>
 
@@ -118,23 +172,15 @@ export default function UserDetails({ user }) {
 
                     <label>Portefeuille</label>
 
-                    <span>
-
-                        {user.walletBalance ?? 0} FCFA
-
-                    </span>
+                    <span>{wallet} FCFA</span>
 
                 </div>
 
                 <div className="detail-card">
 
-                    <label>Nombre de trajets</label>
+                    <label>Trajets</label>
 
-                    <span>
-
-                        {user.totalTrips ?? 0}
-
-                    </span>
+                    <span>{trips}</span>
 
                 </div>
 
@@ -142,11 +188,7 @@ export default function UserDetails({ user }) {
 
                     <label>Note</label>
 
-                    <span>
-
-                        {user.rating ?? 0}
-
-                    </span>
+                    <span>⭐ {rating}</span>
 
                 </div>
 
