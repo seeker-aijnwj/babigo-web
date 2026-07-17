@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/babigo-web/static/css/main.c0991672.css",
-    "main.js": "/babigo-web/static/js/main.1dba985a.js",
+    "main.css": "/babigo-web/static/css/main.2b62978b.css",
+    "main.js": "/babigo-web/static/js/main.90eb0002.js",
     "static/js/453.a632498a.chunk.js": "/babigo-web/static/js/453.a632498a.chunk.js",
     "static/media/girl.jpg": "/babigo-web/static/media/girl.a2d417a2eba607b019c6.jpg",
     "static/media/boy.jpg": "/babigo-web/static/media/boy.9e4076ee8a56f2603d3a.jpg",
     "index.html": "/babigo-web/index.html",
-    "main.c0991672.css.map": "/babigo-web/static/css/main.c0991672.css.map",
-    "main.1dba985a.js.map": "/babigo-web/static/js/main.1dba985a.js.map",
+    "main.2b62978b.css.map": "/babigo-web/static/css/main.2b62978b.css.map",
+    "main.90eb0002.js.map": "/babigo-web/static/js/main.90eb0002.js.map",
     "453.a632498a.chunk.js.map": "/babigo-web/static/js/453.a632498a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c0991672.css",
-    "static/js/main.1dba985a.js"
+    "static/css/main.2b62978b.css",
+    "static/js/main.90eb0002.js"
   ]
 }

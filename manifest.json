@@ -1,6 +1,6 @@
 {
-    "name": "babigo",
-    "short_name": "babigo",
+    "name": "BabiGO Express",
+    "short_name": "BabiGO XP",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
