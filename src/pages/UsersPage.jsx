@@ -62,7 +62,7 @@ export default function UsersPage() {
             <div
                 style={{
                     display: "flex",
-                    height: "calc(100vh - 70px)",
+                    height: "calc(100vh - 90px)",
                     background: "#f5f7fa"
                 }}
             >

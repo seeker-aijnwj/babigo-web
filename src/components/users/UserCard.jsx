@@ -16,11 +16,20 @@ export default function UserCard({
     return (
 
         <div
-            className={`user-card ${selected ? "selected" : ""}`}
+            className={
+
+                selected
+
+                    ? "user-card selected"
+
+                    : "user-card"
+
+            }
+
             onClick={() => onClick(user)}
         >
 
-            <div className="user-avatar">
+            <div className="user-card-avatar">
 
                 {
                     user.photoUrl || user.avatar ? (
@@ -43,20 +52,24 @@ export default function UserCard({
 
             </div>
 
-            <div className="user-info">
+            <div className="user-card-content">
 
-                <h3>
+                <div className="user-card-header">
 
-                    {fullName || "Utilisateur"}
+                    <h3>
 
-                </h3>
+                        {fullName || "Utilisateur"}
 
-                <p>
+                    </h3>
 
-                    {user.role}
+                    <span className='user-role'>
 
-                </p>
+                        {user.role}
 
+                    </span>
+
+                </div>
+                
                 <small>
 
                     {user.phone || user.numero}

@@ -1,3 +1,5 @@
+// src/components/Sidebar.jsx
+
 import { useState } from "react";
 
 import "./dashboard.css";

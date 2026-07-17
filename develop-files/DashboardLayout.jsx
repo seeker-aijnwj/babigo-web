@@ -1,6 +1,8 @@
+// src/components/layouts/DashboardLayout.jsx
+
 import { useEffect, useState } from "react";
 
-import Sidebar from "../dashboard/Sidebar";
+import Sidebar from "../Sidebar";
 
 import useResponsive from "../../hooks/useResponsive";
 

@@ -66,7 +66,7 @@ export default function UserDetails({ user }) {
 
                     <h2>{fullName}</h2>
 
-                    <p>{user.role}</p>
+                    <p>{user.email}</p>
 
                 </div>
 
@@ -84,9 +84,9 @@ export default function UserDetails({ user }) {
 
                 <div className="detail-card">
 
-                    <label>Email</label>
+                    <label>Rôle</label>
 
-                    <span>{user.email}</span>
+                    <span>{user.role}</span>
 
                 </div>
 
