@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/babigo-web/static/css/main.0d051fa9.css",
+    "main.js": "/babigo-web/static/js/main.32ae22e5.js",
+    "static/media/girl.jpg": "/babigo-web/static/media/girl.a2d417a2eba607b019c6.jpg",
+    "static/media/boy.jpg": "/babigo-web/static/media/boy.9e4076ee8a56f2603d3a.jpg",
+    "index.html": "/babigo-web/index.html",
+    "main.0d051fa9.css.map": "/babigo-web/static/css/main.0d051fa9.css.map",
+    "main.32ae22e5.js.map": "/babigo-web/static/js/main.32ae22e5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0d051fa9.css",
+    "static/js/main.32ae22e5.js"
+  ]
+}
