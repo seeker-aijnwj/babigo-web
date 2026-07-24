@@ -1,6 +1,6 @@
 import DashboardLayout from "../components/layouts/DashboardLayout";
 
-export default function DashboardPage() {
+export default function VehiclesPage() {
 
     return (
 
@@ -8,11 +8,11 @@ export default function DashboardPage() {
 
             <div style={{ padding: "30px" }}>
 
-                <h1>Tableau de bord</h1>
+                <h1>Véhicules</h1>
 
                 <p>
 
-                    Bienvenue sur BABIGO Admin.
+                    Cette page sera développée prochainement.
 
                 </p>
 

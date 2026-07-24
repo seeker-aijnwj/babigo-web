@@ -1,26 +1,93 @@
+/**
+ * ==========================================================
+ * BABIGO Design System
+ * Typography v1.0
+ * ==========================================================
+ */
+
 const typography = {
 
-    fontFamily:
+    fontFamily: "'Inter', sans-serif",
 
-        "'Inter', sans-serif",
+    display: {
 
-    h1:36,
+        size: "48px",
 
-    h2:30,
+        weight: 700,
 
-    h3:24,
+        lineHeight: 1.2
 
-    h4:20,
+    },
 
-    h5:18,
+    h1: {
 
-    h6:16,
+        size: "36px",
 
-    body:15,
+        weight: 700,
 
-    small:13,
+        lineHeight: 1.3
 
-    tiny:12
+    },
+
+    h2: {
+
+        size: "28px",
+
+        weight: 700,
+
+        lineHeight: 1.35
+
+    },
+
+    h3: {
+
+        size: "22px",
+
+        weight: 600,
+
+        lineHeight: 1.4
+
+    },
+
+    h4: {
+
+        size: "18px",
+
+        weight: 600,
+
+        lineHeight: 1.5
+
+    },
+
+    bodyLarge: {
+
+        size: "16px",
+
+        weight: 400,
+
+        lineHeight: 1.6
+
+    },
+
+    body: {
+
+        size: "14px",
+
+        weight: 400,
+
+        lineHeight: 1.6
+
+    },
+
+    caption: {
+
+        size: "12px",
+
+        weight: 500,
+
+        lineHeight: 1.5
+
+    }
 
 };
 

@@ -1,98 +1,97 @@
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import {
+    FiHome,
+    FiUsers,
+    FiMap,
+    FiTruck,
+    FiCreditCard,
+    FiHeadphones,
+    FiTrendingUp,
+    FiSettings
+} from "react-icons/fi";
 
 import "./dashboard.css";
 
 const menus = [
 
     {
-        id: "dashboard",
-        title: "Tableau de bord",
-        icon: "🏠"
+        label: "Tableau de bord",
+        path: "/",
+        icon: FiHome
     },
 
     {
-        id: "users",
-        title: "Utilisateurs",
-        icon: "👥"
+        label: "Utilisateurs",
+        path: "/users",
+        icon: FiUsers
     },
 
     {
-        id: "trips",
-        title: "Trajets",
-        icon: "🚘"
+        label: "Trajets",
+        path: "/trips",
+        icon: FiMap
     },
 
     {
-        id: "vehicles",
-        title: "Véhicules",
-        icon: "🚗"
+        label: "Véhicules",
+        path: "/vehicles",
+        icon: FiTruck
     },
 
     {
-        id: "payments",
-        title: "Paiements",
-        icon: "💳"
+        label: "Paiements",
+        path: "/payments",
+        icon: FiCreditCard
     },
 
     {
-        id: "support",
-        title: "Support",
-        icon: "🛠"
+        label: "Support",
+        path: "/support",
+        icon: FiHeadphones
     },
 
     {
-        id: "investors",
-        title: "Investisseurs",
-        icon: "📈"
+        label: "Investisseurs",
+        path: "/investors",
+        icon: FiTrendingUp
     },
 
     {
-        id: "settings",
-        title: "Paramètres",
-        icon: "⚙"
+        label: "Paramètres",
+        path: "/settings",
+        icon: FiSettings
     }
 
 ];
 
-export default function Sidebar({
-
-    onNavigate
-
-}) {
-
-    const [activeMenu, setActiveMenu] = useState("users");
-
-    function handleMenuClick(menuId) {
-
-        setActiveMenu(menuId);
-
-        console.log("Navigation :", menuId);
-
-        if (onNavigate) {
-
-            onNavigate();
-
-        }
-
-    }
+export default function Sidebar() {
 
     return (
 
         <aside className="sidebar">
 
-            <div className="sidebar-header">
+            <div className="logo">
 
-                <div className="sidebar-logo">
+                <div className="logo-circle">
 
                     B
 
                 </div>
 
-                <div className="sidebar-brand">
+                <div>
 
-                    <h2>BABIGO</h2>
+                    <div className="logo-title">
 
-                    <span>Express Admin</span>
+                        BABIGO
+
+                    </div>
+
+                    <div className="logo-subtitle">
+
+                        Admin Platform
+
+                    </div>
 
                 </div>
 
@@ -102,41 +101,45 @@ export default function Sidebar({
 
                 {
 
-                    menus.map((menu) => (
+                    menus.map(menu => {
 
-                        <button
+                        const Icon = menu.icon;
 
-                            key={menu.id}
+                        return (
 
-                            className={
+                            <NavLink
 
-                                menu.id === activeMenu
+                                key={menu.path}
 
-                                    ? "menu-item active"
+                                to={menu.path}
 
-                                    : "menu-item"
+                                end={menu.path === "/"}
 
-                            }
+                                className={({ isActive }) =>
 
-                            onClick={() => handleMenuClick(menu.id)}
+                                    isActive
 
-                        >
+                                        ? "menu-item active"
 
-                            <span className="menu-icon">
+                                        : "menu-item"
 
-                                {menu.icon}
+                                }
 
-                            </span>
+                            >
 
-                            <span className="menu-title">
+                                <Icon className="menu-icon" />
 
-                                {menu.title}
+                                <span>
 
-                            </span>
+                                    {menu.label}
 
-                        </button>
+                                </span>
 
-                    ))
+                            </NavLink>
+
+                        );
+
+                    })
 
                 }
 
@@ -144,7 +147,41 @@ export default function Sidebar({
 
             <div className="sidebar-footer">
 
-                Version 0.2.0
+                <div className="sidebar-user">
+
+                    <div className="sidebar-avatar">
+
+                        A
+
+                    </div>
+
+                    <div className="sidebar-user-info">
+
+                        <div className="sidebar-user-name">
+
+                            Administrateur
+
+                        </div>
+
+                        <div className="sidebar-user-email">
+
+                            admin@babigo.africa
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+
+                    className="collapse-button"
+
+                >
+
+                    ⇤ Réduire
+
+                </button>
 
             </div>
 
