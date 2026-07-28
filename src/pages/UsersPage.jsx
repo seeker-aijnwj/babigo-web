@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import DashboardLayout from "../components/layouts/DashboardLayout";
+import DashboardLayout from "../components/layouts/DashboardLayout/DashboardLayout";
 
 import UserList from "../components/users/UserList";
 import UserDetails from "../components/users/UserDetails";
@@ -81,7 +81,9 @@ export default function UsersPage() {
 
     return (
 
-        <DashboardLayout>
+        <DashboardLayout
+            pageTitle="Utilisateurs"
+        >
 
             <div className="users-page">
 

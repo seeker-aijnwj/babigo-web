@@ -25,6 +25,7 @@ import VehiclesPage from "../pages/VehiclesPage";
 import PaymentsPage from "../pages/PaymentsPage";
 import SupportPage from "../pages/SupportPage";
 import InvestorsPage from "../pages/InvestorsPage";
+import ProfilePage from "../pages/ProfilePage";
 import SettingsPage from "../pages/SettingsPage";
 
 export default function AppRoutes() {
@@ -86,6 +87,14 @@ export default function AppRoutes() {
                 path="/investors"
 
                 element={<InvestorsPage />}
+
+            />
+
+            <Route
+
+                path="/account"
+
+                element={<ProfilePage />}
 
             />
 

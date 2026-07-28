@@ -1,0 +1,151 @@
+/* ==========================================================
+   BABIGO Admin
+   users.css
+   Version : 0.2.1
+
+   src/components/commands/command.css
+========================================================== */
+
+/* ==========================================================
+   COMMAND CENTER
+========================================================== */
+
+
+.command-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(15,23,42,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    padding-top:80px;
+
+    z-index:2000;
+
+}
+
+.command-dialog{
+
+    width:min(700px,92vw);
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 30px 80px rgba(15,23,42,.25);
+
+}
+
+.command-search-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:20px;
+
+    border-bottom:1px solid #E2E8F0;
+
+}
+
+.command-search-header input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    font-size:16px;
+
+}
+
+.command-section-title{
+
+    padding:18px 20px 10px;
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+    color:#64748B;
+
+    font-weight:700;
+
+}
+
+.command-item{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:16px 20px;
+
+    border:none;
+
+    background:white;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    text-align:left;
+
+}
+
+.command-item:hover{
+
+    background:#F8FAFC;
+
+}
+
+.command-item-icon{
+
+    font-size:20px;
+
+    color:var(--color-primary);
+
+}
+
+.command-item small{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#64748B;
+
+}
+
+.command-history{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:18px 20px;
+
+    border-top:1px solid #E2E8F0;
+
+    color:#64748B;
+
+}
+

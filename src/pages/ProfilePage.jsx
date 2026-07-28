@@ -1,14 +1,16 @@
 import DashboardLayout from "../components/layouts/DashboardLayout/DashboardLayout";
 
-export default function SettingsPage() {
+export default function PaymentsPage() {
 
     return (
 
-        <DashboardLayout>
+        <DashboardLayout
+            pageTitle="Mon Profil"
+        >
 
             <div style={{ padding: "30px" }}>
 
-                <h1>Paramètres</h1>
+                <h1>Mes informations </h1>
 
                 <p>
 

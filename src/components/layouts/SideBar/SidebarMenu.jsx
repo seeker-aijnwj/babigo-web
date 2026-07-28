@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import "../DashboardLayout/dashboard.css";
 
 import {
     FiHome,
@@ -8,10 +9,9 @@ import {
     FiCreditCard,
     FiHeadphones,
     FiTrendingUp,
-    FiSettings
+    FiSettings,
+    FiUser
 } from "react-icons/fi";
-
-import "./dashboard.css";
 
 const menus = [
 
@@ -48,13 +48,20 @@ const menus = [
     {
         label: "Support",
         path: "/support",
-        icon: FiHeadphones
+        icon: FiHeadphones,
+        badge: 3
     },
 
     {
         label: "Investisseurs",
         path: "/investors",
         icon: FiTrendingUp
+    },
+
+    {
+        label: "Mon profil",
+        path: "/account",
+        icon: FiUser
     },
 
     {
@@ -65,43 +72,17 @@ const menus = [
 
 ];
 
-export default function Sidebar() {
+export default function SidebarMenu() {
 
     return (
 
-        <aside className="sidebar">
-
-            <div className="logo">
-
-                <div className="logo-circle">
-
-                    B
-
-                </div>
-
-                <div>
-
-                    <div className="logo-title">
-
-                        BABIGO
-
-                    </div>
-
-                    <div className="logo-subtitle">
-
-                        Admin Platform
-
-                    </div>
-
-                </div>
-
-            </div>
+        <div className="sidebar-menu-container">
 
             <nav className="sidebar-menu">
 
                 {
 
-                    menus.map(menu => {
+                    menus.map((menu) => {
 
                         const Icon = menu.icon;
 
@@ -135,6 +116,16 @@ export default function Sidebar() {
 
                                 </span>
 
+                                {menu.badge && (
+
+                                    <div className="menu-badge">
+
+                                        {menu.badge}
+
+                                    </div>
+
+                                )}
+
                             </NavLink>
 
                         );
@@ -145,47 +136,7 @@ export default function Sidebar() {
 
             </nav>
 
-            <div className="sidebar-footer">
-
-                <div className="sidebar-user">
-
-                    <div className="sidebar-avatar">
-
-                        A
-
-                    </div>
-
-                    <div className="sidebar-user-info">
-
-                        <div className="sidebar-user-name">
-
-                            Administrateur
-
-                        </div>
-
-                        <div className="sidebar-user-email">
-
-                            admin@babigo.africa
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <button
-
-                    className="collapse-button"
-
-                >
-
-                    ⇤ Réduire
-
-                </button>
-
-            </div>
-
-        </aside>
+        </div>
 
     );
 

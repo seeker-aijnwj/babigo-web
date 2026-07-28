@@ -1,0 +1,865 @@
+/* ==========================================================
+   BABIGO Admin
+   dashboard.css
+   Version : 0.2.1
+
+   src/components/layouts/DashboardLayout/dashboard.css
+========================================================== */
+
+
+/** Description
+
+    1. Variables locales (si nécessaire)
+
+    2. Dashboard Shell
+
+    3. Sidebar
+
+    4. Sidebar Header
+
+    5. Sidebar Menu
+
+    6. Sidebar Workspace
+
+    7. Sidebar Footer
+
+    8. TopBar
+
+    9. Content
+
+    10. Responsive
+
+    11. Animations
+
+    12. Scrollbars 
+ */
+
+ /* ==========================================================
+   DASHBOARD SHELL
+========================================================== */
+
+.dashboard-layout{
+
+    display:flex;
+
+    width:100%;
+
+    height:100dvh;
+
+    overflow:hidden;
+
+    background:var(--color-background);
+
+}
+
+.dashboard-main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+    min-height:0;
+
+    background:var(--color-background);
+
+}
+
+.dashboard-content{
+
+    flex:1;
+
+    min-width:0;
+
+    min-height:0;
+
+    overflow:auto;
+
+    background:var(--color-background);
+
+    padding: 16px;
+
+}
+
+/* ==========================================================
+   SIDEBAR WRAPPER
+========================================================== */
+
+.sidebar-wrapper{
+
+    display:flex;
+
+    flex-shrink:0;
+
+}
+
+.sidebar-backdrop{
+
+    display:none;
+
+}
+
+@media (max-width:768px){
+
+    .sidebar-wrapper{
+
+        position:fixed;
+
+        left:0;
+
+        top:0;
+
+        bottom:0;
+
+        z-index:1000;
+
+        transform:translateX(-100%);
+
+        transition:transform .30s ease;
+
+    }
+
+    .sidebar-wrapper.open{
+
+        transform:translateX(0);
+
+    }
+
+    .sidebar-backdrop{
+
+        display:block;
+
+        position:fixed;
+
+        inset:0;
+
+        background:rgba(15,23,42,.45);
+
+        backdrop-filter:blur(2px);
+
+        z-index:900;
+
+    }
+
+}
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+.sidebar{
+
+    width:300px;
+
+    min-width:300px;
+
+    max-width:300px;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    background:var(--color-sidebar);
+
+    border-right:1px solid var(--color-sidebar-border);
+
+    transition:width .25s ease;
+
+}
+
+/* ==========================================================
+   SIDEBAR SCROLL
+========================================================== */
+
+.sidebar-menu-container{
+
+    flex:1;
+
+    min-height:0;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding:16px 0;
+
+}
+
+.sidebar-menu-container::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.sidebar-menu-container::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+.sidebar-menu-container::-webkit-scrollbar-thumb{
+
+    background:rgba(148,163,184,.35);
+
+    border-radius:999px;
+
+}
+
+.sidebar-menu-container::-webkit-scrollbar-thumb:hover{
+
+    background:rgba(148,163,184,.55);
+
+}
+
+.sidebar-menu-container{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:rgba(148,163,184,.55) transparent;
+
+}
+
+/* ==========================================================
+   SIDEBAR HEADER
+========================================================== */
+
+.sidebar-header{
+
+    flex-shrink:0;
+
+    padding:24px;
+
+    background:var(--color-sidebar);
+
+    border-bottom:1px solid var(--color-sidebar-border);
+
+}
+
+.sidebar-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.sidebar-brand-logo{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+    background:linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-primary-dark)
+    );
+
+    color:white;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    box-shadow:var(--shadow-md);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.sidebar-brand:hover .sidebar-brand-logo{
+
+    transform:scale(1.05);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.sidebar-brand-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    min-width:0;
+
+}
+
+.sidebar-brand-content h1{
+
+    margin:0;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    letter-spacing:.02em;
+
+}
+
+.sidebar-brand-content p{
+
+    margin-top:4px;
+
+    color:var(--color-muted);
+
+    font-size:13px;
+
+    line-height:1.4;
+
+}
+
+/* ==========================================================
+   SIDEBAR MENU
+========================================================== */
+
+.sidebar-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+    padding:0 12px;
+
+}
+
+/* ----------------------------------------------------------
+   Menu Item
+---------------------------------------------------------- */
+
+.menu-item{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    width:100%;
+
+    min-height:50px;
+
+    padding:0 16px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:#CBD5E1;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    transition:
+        background .20s ease,
+        color .20s ease,
+        transform .20s ease;
+
+    cursor:pointer;
+
+}
+
+.menu-item:hover{
+
+    background:rgba(255,255,255,.06);
+
+    color:white;
+
+    transform:translateX(2px);
+
+}
+
+/* ----------------------------------------------------------
+   Active Item
+---------------------------------------------------------- */
+
+.menu-item.active{
+
+    background:rgba(37,99,235,.18);
+
+    color:white;
+
+}
+
+.menu-item.active::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-12px;
+
+    top:8px;
+
+    bottom:8px;
+
+    width:4px;
+
+    border-radius:999px;
+
+    background:var(--color-primary);
+
+}
+
+/* ----------------------------------------------------------
+   Icon
+---------------------------------------------------------- */
+
+.menu-icon{
+
+    flex-shrink:0;
+
+    font-size:20px;
+
+    transition:transform .2s ease;
+
+}
+
+.menu-item:hover .menu-icon{
+
+    transform:scale(1.08);
+
+}
+
+/* ----------------------------------------------------------
+   Texte
+---------------------------------------------------------- */
+
+.menu-item span{
+
+    flex:1;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+/* ----------------------------------------------------------
+   Badge
+---------------------------------------------------------- */
+
+.menu-badge{
+
+    min-width:22px;
+
+    height:22px;
+
+    padding:0 8px;
+
+    border-radius:999px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:var(--color-primary);
+
+    color:white;
+
+    font-size:11px;
+
+    font-weight:600;
+
+}
+
+/* ==========================================================
+   SIDEBAR WORKSPACE
+========================================================== */
+
+.sidebar-workspace{
+
+    flex-shrink:0;
+
+    padding:18px;
+
+    border-top:1px solid var(--color-sidebar-border);
+
+    border-bottom:1px solid var(--color-sidebar-border);
+
+    background:var(--color-sidebar);
+
+}
+
+.workspace-title{
+
+    margin-bottom:12px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    color:#94A3B8;
+
+}
+
+.workspace-card{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.05);
+
+    cursor:pointer;
+
+    transition:
+        background .20s ease,
+        transform .20s ease,
+        box-shadow .20s ease;
+
+    color:white;
+
+}
+
+.workspace-card:hover{
+
+    background:rgba(255,255,255,.08);
+
+    transform:translateY(-1px);
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.workspace-icon{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-primary-dark)
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+    color:white;
+
+    font-size:20px;
+
+}
+
+.workspace-body{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+}
+
+.workspace-name{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:white;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+.workspace-subtitle{
+
+    margin-top:3px;
+
+    font-size:12px;
+
+    color:#94A3B8;
+
+}
+
+.workspace-chevron{
+
+    flex-shrink:0;
+
+    font-size:18px;
+
+    color:#CBD5E1;
+
+    transition:transform .2s ease;
+
+}
+
+.workspace-card:hover .workspace-chevron{
+
+    transform:rotate(180deg);
+
+}
+
+/* ==========================================================
+   USER HUB
+========================================================== */
+
+.sidebar-footer{
+
+    flex-shrink:0;
+
+    padding:18px;
+
+    background:var(--color-sidebar);
+
+}
+
+.profile-card{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.05);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    color:white;
+
+}
+
+.profile-card:hover{
+
+    background:rgba(255,255,255,.08);
+
+}
+
+.profile-avatar{
+
+    position:relative;
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-primary-dark)
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:700;
+
+    font-size:20px;
+
+    color:white;
+
+    flex-shrink:0;
+
+}
+
+.profile-status{
+
+    position:absolute;
+
+    right:1px;
+
+    bottom:1px;
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50%;
+
+    background:#22C55E;
+
+    border:2px solid var(--color-sidebar);
+
+}
+
+.profile-body{
+
+    flex:1;
+
+    min-width:0;
+
+    text-align:left;
+
+}
+
+.profile-name{
+
+    color:white;
+
+    font-weight:600;
+
+    font-size:14px;
+
+}
+
+.profile-role{
+
+    margin-top:2px;
+
+    color:#94A3B8;
+
+    font-size:12px;
+
+}
+
+.profile-email{
+
+    margin-top:4px;
+
+    color:#64748B;
+
+    font-size:11px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+.profile-chevron{
+
+    color:#CBD5E1;
+
+    font-size:18px;
+
+}
+
+.profile-menu{
+
+    margin-top:14px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.profile-action{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:transparent;
+
+    color:#CBD5E1;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    font-size:14px;
+
+}
+
+.profile-action:hover{
+
+    background:rgba(255,255,255,.06);
+
+    color:white;
+
+}
+
+.profile-action.logout:hover{
+
+    background:rgba(220,38,38,.15);
+
+    color:#FCA5A5;
+
+}

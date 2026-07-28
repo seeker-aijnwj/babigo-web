@@ -1,0 +1,557 @@
+/* ==========================================================
+   BABIGO Admin
+   dashboard.css
+   Version : 0.2.1
+
+   src/components/dashboard/page.css
+========================================================== */
+
+
+/* ==========================================================
+   WELCOME BANNER
+========================================================== */
+
+.welcome-banner{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:32px;
+
+    width: 90%;
+
+    margin: 12px auto;
+
+    padding:32px;
+
+    border-radius:24px;
+
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #1D4ED8
+    );
+
+    color:white;
+
+    overflow:hidden;
+
+}
+
+.welcome-left{
+
+    flex:1;
+
+}
+
+.welcome-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.18);
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.welcome-left h1{
+
+    margin:18px 0 12px;
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+.welcome-left p{
+
+    max-width:650px;
+
+    line-height:1.7;
+
+    opacity:.95;
+
+}
+
+.welcome-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+.welcome-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(8px);
+
+    font-size:14px;
+
+}
+
+@media (max-width:900px){
+
+    .welcome-banner{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .welcome-left h1{
+
+        font-size:28px;
+
+    }
+
+    .welcome-right{
+
+        width:100%;
+
+    }
+
+}
+
+/* ==========================================================
+   STATS GRID
+========================================================== */
+
+.stats-grid{
+
+    margin-top:28px;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:22px;
+
+}
+
+/* ==========================================================
+   STAT CARD
+========================================================== */
+
+.stat-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:22px;
+
+    background:white;
+
+    border-radius:20px;
+
+    border:1px solid #E2E8F0;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+    cursor:pointer;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 14px 30px rgba(15,23,42,.08);
+
+}
+
+.stat-icon{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:28px;
+
+    flex-shrink:0;
+
+}
+
+.stat-content{
+
+    flex:1;
+
+}
+
+.stat-title{
+
+    font-size:14px;
+
+    color:#64748B;
+
+    margin-bottom:6px;
+
+}
+
+.stat-value{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#0F172A;
+
+    line-height:1.1;
+
+}
+
+.stat-subtitle{
+
+    margin-top:6px;
+
+    font-size:13px;
+
+    color:#16A34A;
+
+}
+
+@media (max-width:768px){
+
+    .stats-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* ==========================================================
+   RECENT ACTIVITY
+========================================================== */
+
+.recent-activity{
+
+    margin-top:28px;
+
+    background:white;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px 24px;
+
+    border-bottom:1px solid #E2E8F0;
+
+}
+
+.card-header h2{
+
+    font-size:18px;
+
+    color:#0F172A;
+
+}
+
+.card-header button{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    border:none;
+
+    background:none;
+
+    color:var(--color-primary);
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.activity-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.activity-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:20px 24px;
+
+    transition:background .2s ease;
+
+}
+
+.activity-item:hover{
+
+    background:#F8FAFC;
+
+}
+
+.activity-icon{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:22px;
+
+    flex-shrink:0;
+
+}
+
+.activity-content{
+
+    flex:1;
+
+}
+
+.activity-content strong{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    color:#0F172A;
+
+}
+
+.activity-content p{
+
+    color:#64748B;
+
+    font-size:14px;
+
+}
+
+.activity-item small{
+
+    color:#94A3B8;
+
+    white-space:nowrap;
+
+}
+
+/* ==========================================================
+   DASHBOARD WORKSPACE
+========================================================== */
+
+.dashboard-workspace{
+
+    margin-top:28px;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:24px;
+
+    align-items:start;
+
+}
+
+.dashboard-left{
+
+    min-width:0;
+
+}
+
+.dashboard-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+@media (max-width:1024px){
+
+    .dashboard-workspace{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* ==========================================================
+   DASHBOARD CARD
+========================================================== */
+
+.dashboard-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.card-badge{
+
+    padding:6px 10px;
+
+    border-radius:999px;
+
+    background:#EFF6FF;
+
+    color:var(--color-primary);
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.chart-placeholder{
+
+    height:320px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#94A3B8;
+
+    font-size:15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #FFFFFF,
+            #F8FAFC
+        );
+
+}
+
+.quick-actions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:16px;
+
+    gap:12px;
+
+}
+
+.quick-action-button{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#F8FAFC;
+
+    cursor:pointer;
+
+    transition:all .2s ease;
+
+    text-align:left;
+
+    font-size:14px;
+
+    color:#334155;
+
+}
+
+.quick-action-button:hover{
+
+    background:#DBEAFE;
+
+    color:var(--color-primary);
+
+    transform:translateX(4px);
+
+}

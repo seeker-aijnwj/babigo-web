@@ -1,10 +1,12 @@
-import DashboardLayout from "../components/layouts/DashboardLayout";
+import DashboardLayout from "../components/layouts/DashboardLayout/DashboardLayout";
 
 export default function PaymentsPage() {
 
     return (
 
-        <DashboardLayout>
+        <DashboardLayout
+            pageTitle="Finances"
+        >
 
             <div style={{ padding: "30px" }}>
 

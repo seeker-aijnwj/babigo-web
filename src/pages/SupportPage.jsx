@@ -1,4 +1,4 @@
-import DashboardLayout from "../components/layouts/DashboardLayout";
+import DashboardLayout from "../components/layouts/DashboardLayout/DashboardLayout";
 
 export default function SupportPage() {
 
