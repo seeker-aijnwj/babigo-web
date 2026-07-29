@@ -1,60 +1,62 @@
 import {
-    FiUserPlus,
+    FiUsers,
     FiMap,
     FiCreditCard,
-    FiTruck,
-    FiArrowRight
+    FiTruck
 } from "react-icons/fi";
 
 import "./page.css";
 
-const activities = [
+/**
+ * ============================================================
+ * RecentActivity
+ * ============================================================
+ *
+ * Affiche les dernières activités de la plateforme.
+ *
+ * Version F1.0 :
+ * - Affichage des activités reçues en props
+ * - Aucun accès direct à Firebase
+ *
+ * Les données sont préparées par DashboardService.
+ *
+ * ============================================================
+ */
 
-    {
-        id: 1,
-        icon: FiUserPlus,
-        color: "#2563EB",
-        title: "Nouvel utilisateur",
-        description: "KOUASSI Jean a créé un compte.",
-        time: "Il y a 5 min"
-    },
+export default function RecentActivity({
 
-    {
-        id: 2,
-        icon: FiMap,
-        color: "#10B981",
-        title: "Trajet publié",
-        description: "Abidjan → Yamoussoukro",
-        time: "Il y a 18 min"
-    },
+    activities = []
 
-    {
-        id: 3,
-        icon: FiCreditCard,
-        color: "#8B5CF6",
-        title: "Paiement reçu",
-        description: "25 000 FCFA",
-        time: "Il y a 34 min"
-    },
+}) {
 
-    {
-        id: 4,
-        icon: FiTruck,
-        color: "#F59E0B",
-        title: "Véhicule ajouté",
-        description: "Toyota Corolla 2024",
-        time: "Aujourd'hui"
-    }
+    const getIcon = (type) => {
 
-];
+        switch (type) {
 
-export default function RecentActivity() {
+            case "user":
+                return <FiUsers />;
+
+            case "trip":
+                return <FiMap />;
+
+            case "transaction":
+                return <FiCreditCard />;
+
+            case "vehicle":
+                return <FiTruck />;
+
+            default:
+                return <FiUsers />;
+
+        }
+
+    };
 
     return (
 
-        <section className="recent-activity">
+        <section className="dashboard-widget">
 
-            <div className="card-header">
+            <div className="dashboard-widget-header">
 
                 <h2>
 
@@ -62,73 +64,77 @@ export default function RecentActivity() {
 
                 </h2>
 
-                <button>
-
-                    Tout voir
-
-                    <FiArrowRight />
-
-                </button>
-
             </div>
 
-            <div className="activity-list">
+            {
 
-                {
+                activities.length === 0 ? (
 
-                    activities.map(activity => {
+                    <div className="empty-activity">
 
-                        const Icon = activity.icon;
+                        Aucune activité récente.
 
-                        return (
+                    </div>
 
-                            <div
-                                key={activity.id}
-                                className="activity-item"
-                            >
+                ) : (
+
+                    <div className="recent-activity-list">
+
+                        {
+
+                            activities.map((activity) => (
 
                                 <div
-                                    className="activity-icon"
-                                    style={{
-                                        background: activity.color
-                                    }}
+
+                                    key={activity.id}
+
+                                    className="activity-row"
+
                                 >
 
-                                    <Icon />
+                                    <div className="activity-icon">
+
+                                        {
+
+                                            getIcon(activity.type)
+
+                                        }
+
+                                    </div>
+
+                                    <div className="activity-content">
+
+                                        <strong>
+
+                                            {activity.title}
+
+                                        </strong>
+
+                                        <span>
+
+                                            {activity.description}
+
+                                        </span>
+
+                                    </div>
+
+                                    <small>
+
+                                        {activity.time}
+
+                                    </small>
 
                                 </div>
 
-                                <div className="activity-content">
+                            ))
 
-                                    <strong>
+                        }
 
-                                        {activity.title}
+                    </div>
 
-                                    </strong>
+                )
 
-                                    <p>
-
-                                        {activity.description}
-
-                                    </p>
-
-                                </div>
-
-                                <small>
-
-                                    {activity.time}
-
-                                </small>
-
-                            </div>
-
-                        );
-
-                    })
-
-                }
-
-            </div>
+            }
 
         </section>
 

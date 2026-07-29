@@ -1,77 +1,105 @@
 import {
-
     FiUsers,
     FiTruck,
     FiMap,
     FiCreditCard
-
 } from "react-icons/fi";
 
 import StatCard from "./StatCard";
 
 import "./page.css";
 
-const stats = [
+/**
+ * ============================================================
+ * StatsGrid
+ * ============================================================
+ *
+ * Affiche les principales statistiques du Dashboard.
+ *
+ * Ce composant ne connaît ni Firestore,
+ * ni DashboardRepository.
+ *
+ * Il reçoit uniquement les données préparées
+ * par DashboardService via useDashboard().
+ *
+ * ============================================================
+ */
 
-    {
+export default function StatsGrid({
 
-        title: "Utilisateurs",
+    stats,
 
-        value: "2 845",
+    loading
 
-        subtitle: "+24 aujourd'hui",
+}) {
 
-        icon: FiUsers,
+    const cards = [
 
-        color: "#2563EB"
+        {
 
-    },
+            id: "users",
 
-    {
+            title: "Utilisateurs",
 
-        title: "Trajets",
+            value: stats?.overview?.users ?? 0,
 
-        value: "184",
+            subtitle: `${stats?.overview?.drivers ?? 0} conducteurs et ${stats?.overview?.passengers ?? 0} passagers`,
 
-        subtitle: "36 en cours",
+            icon: FiUsers,
 
-        icon: FiMap,
+            color: "#2563EB"
 
-        color: "#10B981"
+        },
 
-    },
+        {
 
-    {
+            id: "trips",
 
-        title: "Véhicules",
+            title: "Trajets",
 
-        value: "563",
+            value: stats?.overview?.trips ?? 0,
 
-        subtitle: "529 disponibles",
+            subtitle: `${stats?.trips?.active ?? 0} en cours`,
 
-        icon: FiTruck,
+            icon: FiMap,
 
-        color: "#F59E0B"
+            color: "#10B981"
 
-    },
+        },
 
-    {
+        {
 
-        title: "Paiements",
+            id: "vehicles",
 
-        value: "8 450 000 FCFA",
+            title: "Véhicules",
 
-        subtitle: "Aujourd'hui",
+            value: stats?.overview?.vehicles ?? 0,
 
-        icon: FiCreditCard,
+            subtitle: "Flotte enregistrée",
 
-        color: "#8B5CF6"
+            icon: FiTruck,
 
-    }
+            color: "#F59E0B"
 
-];
+        },
 
-export default function StatsGrid() {
+        {
+
+            id: "transactions",
+
+            title: "Transactions",
+
+            value: stats?.overview?.transactions ?? 0,
+
+            subtitle: `${stats?.finance?.succeededTransactions ?? 0} réussies`,
+
+            icon: FiCreditCard,
+
+            color: "#8B5CF6"
+
+        }
+
+    ];
 
     return (
 
@@ -79,13 +107,23 @@ export default function StatsGrid() {
 
             {
 
-                stats.map(stat => (
+                cards.map(card => (
 
                     <StatCard
 
-                        key={stat.title}
+                        key={card.id}
 
-                        {...stat}
+                        title={card.title}
+
+                        value={card.value}
+
+                        subtitle={card.subtitle}
+
+                        icon={card.icon}
+
+                        color={card.color}
+
+                        loading={loading}
 
                     />
 

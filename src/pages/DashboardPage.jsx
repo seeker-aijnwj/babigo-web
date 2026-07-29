@@ -2,24 +2,107 @@ import DashboardLayout from "../components/layouts/DashboardLayout/DashboardLayo
 
 import WelcomeBanner from "../components/dashboard/WelcomeBanner";
 import StatsGrid from "../components/dashboard/StatusGrid";
-import RecentActivity from "../components/dashboard/RecentActivity";
 import DashboardWorkspace from "../components/dashboard/DashboardWorkspace";
 
-import "../components/dashboard/page.css";
+import useDashboard from "../hooks/useDashboard";
+
+/**
+ * ============================================================
+ * DashboardPage
+ * ============================================================
+ *
+ * Page principale du Back-Office.
+ *
+ * Cette page ne connaît ni Firebase,
+ * ni DashboardRepository.
+ *
+ * Elle assemble simplement les widgets
+ * qui composent le Dashboard.
+ *
+ * Architecture :
+ *
+ * DashboardPage
+ *      │
+ *      ▼
+ * useDashboard()
+ *      │
+ *      ▼
+ * DashboardService
+ *      │
+ *      ▼
+ * DashboardRepository
+ *      │
+ *      ▼
+ * Firestore
+ *
+ * ============================================================
+ */
 
 export default function DashboardPage() {
+
+    const {
+
+        stats,
+
+        loading,
+
+        error,
+
+        refresh,
+
+        lastRefresh
+
+    } = useDashboard();
 
     return (
 
         <DashboardLayout pageTitle="Tableau de bord">
 
-            <WelcomeBanner />
+            <div className="dashboard-page">
 
-            <StatsGrid />
+                <WelcomeBanner
 
-            <DashboardWorkspace />
+                    stats={stats}
 
-            <RecentActivity />
+                    loading={loading}
+
+                    refresh={refresh}
+
+                    lastRefresh={lastRefresh}
+
+                />
+
+                <StatsGrid
+
+                    stats={stats}
+
+                    loading={loading}
+
+                />
+
+                <DashboardWorkspace
+
+                    stats={stats}
+
+                    activities={stats?.activities ?? []}
+
+                />
+
+                {
+
+                    error && (
+
+                        <div className="dashboard-error">
+
+                            Impossible de charger les statistiques.
+
+                        </div>
+
+                    )
+
+                }
+
+            </div>
 
         </DashboardLayout>
 

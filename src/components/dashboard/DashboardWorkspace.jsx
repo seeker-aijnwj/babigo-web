@@ -1,25 +1,55 @@
 import ActivityChart from "./ActivityChart";
 import QuickActions from "./QuickActions";
+import RecentActivity from "./RecentActivity";
 
 import "./page.css";
 
-export default function DashboardWorkspace() {
+/**
+ * ============================================================
+ * DashboardWorkspace
+ * ============================================================
+ *
+ * Zone principale du Dashboard.
+ *
+ * Elle regroupe les différents widgets
+ * qui composent l'espace de travail.
+ *
+ * Structure :
+ *
+ * ┌──────────────────────────────┬─────────────────────┐
+ * │                              │                     │
+ * │      ActivityChart           │    QuickActions    │
+ * │                              │                     │
+ * ├──────────────────────────────┴─────────────────────┤
+ * │                                                    │
+ * │              RecentActivity                        │
+ * │                                                    │
+ * └────────────────────────────────────────────────────┘
+ *
+ * ============================================================
+ */
+
+export default function DashboardWorkspace({
+
+    stats
+
+}) {
 
     return (
 
         <section className="dashboard-workspace">
 
-            <div className="dashboard-left">
+            <div className="dashboard-workspace-grid">
 
-                <ActivityChart />
-
-            </div>
-
-            <aside className="dashboard-right">
+                <ActivityChart
+                    stats={stats}
+                />
 
                 <QuickActions />
 
-            </aside>
+            </div>
+
+            <RecentActivity />
 
         </section>
 

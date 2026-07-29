@@ -1,53 +1,128 @@
 import "./page.css";
 
-export default function StatCard({
+/**
+ * ============================================================
+ * StatCard
+ * ============================================================
+ *
+ * Carte de statistique réutilisable.
+ *
+ * Le composant est volontairement "présentationnel".
+ * Il ne connaît ni Firebase, ni le DashboardService.
+ *
+ * Toutes les données lui sont fournies via les props.
+ *
+ * ============================================================
+ */
 
-    icon: Icon,
+export default function StatCard({
 
     title,
 
-    value,
+    value = 0,
 
-    subtitle,
+    subtitle = "",
 
-    color = "#2563EB"
+    icon: Icon,
+
+    color = "#2563EB",
+
+    loading = false,
+
+    onClick
 
 }) {
 
     return (
 
-        <article className="stat-card">
+        <article
 
-            <div
-                className="stat-icon"
-                style={{
-                    background: color
-                }}
-            >
+            className="stat-card"
 
-                <Icon />
+            onClick={onClick}
+
+        >
+
+            <div className="stat-card-top">
+
+                <div
+                    className="stat-card-icon"
+                    style={{
+                        backgroundColor: color
+                    }}
+                >
+
+                    {
+
+                        Icon && <Icon />
+
+                    }
+
+                </div>
 
             </div>
 
-            <div className="stat-content">
+            <div className="stat-card-body">
 
-                <div className="stat-title">
+                <span className="stat-card-title">
 
                     {title}
 
-                </div>
+                </span>
 
-                <div className="stat-value">
+                {
 
-                    {value}
+                    loading
 
-                </div>
+                        ?
 
-                <div className="stat-subtitle">
+                        (
 
-                    {subtitle}
+                            <div className="stat-card-loading">
 
-                </div>
+                                ...
+
+                            </div>
+
+                        )
+
+                        :
+
+                        (
+
+                            <h2 className="stat-card-value">
+
+                                {
+
+                                    typeof value === "number"
+
+                                        ? value.toLocaleString()
+
+                                        : value
+
+                                }
+
+                            </h2>
+
+                        )
+
+                }
+
+                {
+
+                    subtitle &&
+
+                    (
+
+                        <small className="stat-card-subtitle">
+
+                            {subtitle}
+
+                        </small>
+
+                    )
+
+                }
 
             </div>
 
