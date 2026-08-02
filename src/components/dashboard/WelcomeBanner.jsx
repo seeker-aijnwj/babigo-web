@@ -1,5 +1,11 @@
 import { FiRefreshCw, FiSun, FiSunset, FiMoon } from "react-icons/fi";
 
+import {
+
+    FaSignOutAlt,
+
+} from "react-icons/fa";
+
 import "./page.css";
 
 /**
@@ -22,9 +28,13 @@ export default function WelcomeBanner({
 
     stats,
 
+    user,
+
     loading,
 
     refresh,
+
+    onLogout,
 
     lastRefresh
 
@@ -48,6 +58,16 @@ export default function WelcomeBanner({
 
     const { text: greetingText, icon: GreetingIcon } = getGreetingConfig();
     
+    /* =======================================================================
+       VALEURS
+    ======================================================================= */
+
+    const displayName =
+
+        `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim() ||
+
+        "Utilisateur";
+
     const formatDate = (date) => {
 
         if (!date) {
@@ -72,6 +92,36 @@ export default function WelcomeBanner({
 
     };
 
+    /* =======================================================================
+       LOGOUT
+    ======================================================================= */
+
+    async function handleLogout() {
+
+        try {
+
+            if (typeof onLogout === "function") {
+
+                await onLogout();
+
+            }
+
+        }
+
+        catch (exception) {
+
+            console.error(
+
+                "Erreur lors de la déconnexion :", 
+
+                exception
+
+            );
+
+        }
+
+    }
+
     return (
 
         <section className="welcome-banner">
@@ -82,22 +132,29 @@ export default function WelcomeBanner({
 
                     <GreetingIcon />
                     <span>
-                        {greetingText}
+
+                        {greetingText} {displayName}
+
                     </span>
 
                 </div>
 
                 <h1>
 
-                    Bienvenue sur BABIGO Admin
+                    Bienvenue sur votre espace personnel
 
                 </h1>
 
-                <p>
+                {/*<p>
 
                     Pilotez votre plateforme de mobilité depuis un tableau
                     de bord <br /> moderne, rapide et conçu pour évoluer.
 
+                </p>*/}
+
+                <p>
+                    Publiez vos trajets, gérez vos annonces et retrouvez
+                    <br /> facilement vos réservations depuis votre espace personnel.
                 </p>
 
                 <small>
@@ -171,6 +228,32 @@ export default function WelcomeBanner({
                             ? "Actualisation..."
 
                             : "Actualiser"}
+
+                    </span>
+
+                </button>
+
+                <button
+
+                    className="refresh-button"
+
+                    type="button"
+
+                    onClick={handleLogout}
+
+                    disabled={loading}
+
+                >
+
+                    <FaSignOutAlt />
+
+                    <span>
+
+                        {loading
+
+                            ? "Déconnexion..."
+
+                            : "Quitter"}
 
                     </span>
 

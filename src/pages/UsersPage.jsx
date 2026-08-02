@@ -5,7 +5,7 @@ import DashboardLayout from "../components/layouts/DashboardLayout/DashboardLayo
 import UserList from "../components/users/UserList";
 import UserDetails from "../components/users/UserDetails";
 
-import { subscribeToUsers } from "../services/userService";
+import { subscribeToUsers } from "../database/services/userService";
 
 import useResponsive from "../hooks/useResponsive";
 

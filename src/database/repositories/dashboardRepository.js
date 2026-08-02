@@ -15,7 +15,7 @@ import {
     where
 } from "firebase/firestore";
 
-import { db } from "../services/firebase";
+import { db } from "../firebase/firebase";
 
 /**
  * ============================================================

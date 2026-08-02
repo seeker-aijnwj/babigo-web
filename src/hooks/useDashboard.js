@@ -10,7 +10,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import DashboardService from "../services/dashboardService";
+import DashboardService from "../database/services/dashboardService";
 
 /**
  * ============================================================

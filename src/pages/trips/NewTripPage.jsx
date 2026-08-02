@@ -1,6 +1,6 @@
-import DashboardLayout from "../components/layouts/DashboardLayout/DashboardLayout";
+import DashboardLayout from "../../components/layouts/DashboardLayout/DashboardLayout";
 
-export default function TripsPage() {
+export default function NewTripPage() {
 
     return (
 
@@ -8,7 +8,7 @@ export default function TripsPage() {
 
             <div style={{ padding: "30px" }}>
 
-                <h1>Trajets</h1>
+                <h1>Nouvelle annonce</h1>
 
                 <p>
 

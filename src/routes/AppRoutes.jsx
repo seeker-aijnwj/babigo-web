@@ -20,13 +20,17 @@ import UsersPage from "../pages/UsersPage";
 */
 
 import DashboardPage from "../pages/DashboardPage";
-import TripsPage from "../pages/TripsPage";
+import TripsPage from "../pages/trips/TripsPage";
 import VehiclesPage from "../pages/VehiclesPage";
 import PaymentsPage from "../pages/PaymentsPage";
 import SupportPage from "../pages/SupportPage";
 import InvestorsPage from "../pages/InvestorsPage";
 import ProfilePage from "../pages/ProfilePage";
 import SettingsPage from "../pages/SettingsPage";
+import LoginPage from "../pages/auth/LoginPage";
+import RegisterPage from "../pages/auth/RegisterPage";
+import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function AppRoutes() {
 
@@ -34,77 +38,109 @@ export default function AppRoutes() {
 
         <Routes>
 
+            {/* Pages publiques */}
             <Route
 
                 path="/"
 
-                element={<DashboardPage />}
+                element={<LoginPage />}
 
             />
 
             <Route
 
-                path="/users"
+                path="/register"
 
-                element={<UsersPage />}
-
-            />
-
-            <Route
-
-                path="/trips"
-
-                element={<TripsPage />}
+                element={<RegisterPage />}
 
             />
 
             <Route
 
-                path="/vehicles"
+                path="/forgot-password"
 
-                element={<VehiclesPage />}
+                element={<ForgotPasswordPage />}
 
             />
+
+            {/* Pages protégées */}
 
             <Route
+                element={<ProtectedRoute />}
+            >
+                <Route
 
-                path="/payments"
+                    path="/dashboard"
 
-                element={<PaymentsPage />}
+                    element={<DashboardPage />}
 
-            />
+                />
 
-            <Route
+                <Route
 
-                path="/support"
+                    path="/users"
 
-                element={<SupportPage />}
+                    element={<UsersPage />}
 
-            />
+                />
 
-            <Route
+                <Route
 
-                path="/investors"
+                    path="/trips"
 
-                element={<InvestorsPage />}
+                    element={<TripsPage />}
 
-            />
+                />
 
-            <Route
+                <Route
 
-                path="/account"
+                    path="/vehicles"
 
-                element={<ProfilePage />}
+                    element={<VehiclesPage />}
 
-            />
+                />
 
-            <Route
+                <Route
 
-                path="/settings"
+                    path="/payments"
 
-                element={<SettingsPage />}
+                    element={<PaymentsPage />}
 
-            />
+                />
+
+                <Route
+
+                    path="/support"
+
+                    element={<SupportPage />}
+
+                />
+
+                <Route
+
+                    path="/investors"
+
+                    element={<InvestorsPage />}
+
+                />
+
+                <Route
+
+                    path="/account"
+
+                    element={<ProfilePage />}
+
+                />
+
+                <Route
+
+                    path="/settings"
+
+                    element={<SettingsPage />}
+
+                />
+
+            </Route>
 
             <Route
 

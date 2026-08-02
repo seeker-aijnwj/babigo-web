@@ -1,7 +1,7 @@
 import DashboardLayout from "../components/layouts/DashboardLayout/DashboardLayout";
 
 import WelcomeBanner from "../components/dashboard/WelcomeBanner";
-import StatsGrid from "../components/dashboard/StatusGrid";
+import StatsGrid from "../components/dashboard/StatsGrid";
 import DashboardWorkspace from "../components/dashboard/DashboardWorkspace";
 
 import useDashboard from "../hooks/useDashboard";
