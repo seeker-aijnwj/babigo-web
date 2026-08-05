@@ -3,8 +3,12 @@ import "../DashboardLayout/dashboard.css";
 import SidebarHeader from "./SidebarHeader";
 import SidebarMenu from "./SidebarMenu";
 import SidebarWorkspace from "./SidebarWorkspace";
+import SidebarFooter from "./SidebarFooter";
 
-export default function Sidebar() {
+export default function Sidebar({
+    user = {},
+    onLogout = () => {}
+}) {
 
     return (
 
@@ -15,6 +19,11 @@ export default function Sidebar() {
             <SidebarMenu />
 
             <SidebarWorkspace />
+
+            <SidebarFooter
+            
+                
+            />
 
         </aside>
 

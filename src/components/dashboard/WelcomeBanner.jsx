@@ -64,7 +64,7 @@ export default function WelcomeBanner({
 
     const displayName =
 
-        `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim() ||
+        `${user?.prenom ?? ""} ${user?.lastName ?? ""}`.trim() ||
 
         "Utilisateur";
 

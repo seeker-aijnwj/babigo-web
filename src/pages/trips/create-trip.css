@@ -1,0 +1,911 @@
+/******************************************************************************
+ * ============================================================================
+ * BabiGO
+ * CreateTrip.css
+ * ============================================================================
+ *
+ * MVP v1.0
+ *
+ * Page de publication d'un trajet.
+ *
+ ******************************************************************************/
+
+/* ==========================================================================
+   VARIABLES
+   ========================================================================== */
+
+:root {
+
+    --trip-primary: #1565C0;
+    --trip-primary-dark: #0D47A1;
+    --trip-primary-light: #42A5F5;
+
+    --trip-success: #16A34A;
+    --trip-danger: #DC2626;
+    --trip-warning: #F59E0B;
+
+    --trip-background: #F4F7FB;
+    --trip-surface: #FFFFFF;
+
+    --trip-border: #E5E7EB;
+
+    --trip-text: #1E293B;
+    --trip-text-light: #64748B;
+
+    --trip-radius: 22px;
+
+    --trip-shadow:
+        0 10px 35px rgba(15,23,42,.08);
+
+    --trip-shadow-hover:
+        0 18px 45px rgba(21,101,192,.15);
+
+    --trip-transition: .25s ease;
+
+}
+
+/* ==========================================================================
+   PAGE
+   ========================================================================== */
+
+.create-trip-page {
+
+    min-height: 100vh;
+
+    background: var(--trip-background);
+
+    padding: 40px 24px 60px;
+
+}
+
+.create-trip-container {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.create-trip-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+    margin-bottom: 32px;
+
+}
+
+.create-trip-header > div {
+
+    flex: 1;
+
+}
+
+.create-trip-header h1 {
+
+    margin: 0;
+
+    color: var(--trip-text);
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+}
+
+.create-trip-header p {
+
+    margin-top: 8px;
+
+    color: var(--trip-text-light);
+
+    font-size: 1rem;
+
+    line-height: 1.7;
+
+}
+
+/* ==========================================================================
+   BOUTON RETOUR
+   ========================================================================== */
+
+.back-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px 22px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    cursor: pointer;
+
+    background: var(--trip-surface);
+
+    color: var(--trip-primary);
+
+    font-size: .95rem;
+
+    font-weight: 600;
+
+    box-shadow: var(--trip-shadow);
+
+    transition:
+        transform var(--trip-transition),
+        box-shadow var(--trip-transition),
+        background var(--trip-transition);
+
+}
+
+.back-button:hover {
+
+    transform: translateY(-2px);
+
+    background: #EEF6FF;
+
+    box-shadow: var(--trip-shadow-hover);
+
+}
+
+.back-button:active {
+
+    transform: translateY(0);
+
+}
+
+.back-button svg {
+
+    font-size: 1rem;
+
+}
+
+/* ==========================================================================
+   FORMULAIRE
+   ========================================================================== */
+
+.create-trip-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 28px;
+
+}
+
+/* ==========================================================================
+   CARTES DU FORMULAIRE
+   ========================================================================== */
+
+.form-card {
+
+    background: var(--trip-surface);
+
+    border: 1px solid var(--trip-border);
+
+    border-radius: var(--trip-radius);
+
+    padding: 28px;
+
+    box-shadow: var(--trip-shadow);
+
+    transition:
+        transform var(--trip-transition),
+        box-shadow var(--trip-transition);
+
+}
+
+.form-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: var(--trip-shadow-hover);
+
+}
+
+/* ==========================================================================
+   TITRE DE SECTION
+   ========================================================================== */
+
+.form-card h2 {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 0 0 24px;
+
+    font-size: 1.20rem;
+
+    font-weight: 700;
+
+    color: var(--trip-text);
+
+}
+
+.form-card h2 svg {
+
+    color: var(--trip-primary);
+
+    font-size: 1.15rem;
+
+}
+
+/* ==========================================================================
+   GRILLE
+   ========================================================================== */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+
+}
+
+/* ==========================================================================
+   GROUPE DE CHAMP
+   ========================================================================== */
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+.form-group label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: .95rem;
+
+    font-weight: 600;
+
+    color: var(--trip-text);
+
+}
+
+/* ==========================================================================
+   INPUT
+   ========================================================================== */
+
+.form-group input,
+
+.form-group select,
+
+.form-group textarea {
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 1px solid var(--trip-border);
+
+    border-radius: 14px;
+
+    background: #FFFFFF;
+
+    color: var(--trip-text);
+
+    font-size: .95rem;
+
+    font-family: inherit;
+
+    transition:
+        border-color var(--trip-transition),
+        box-shadow var(--trip-transition),
+        background var(--trip-transition);
+
+    outline: none;
+
+    box-sizing: border-box;
+
+}
+
+/* ==========================================================================
+   PLACEHOLDER
+   ========================================================================== */
+
+.form-group input::placeholder,
+
+.form-group textarea::placeholder {
+
+    color: #94A3B8;
+
+}
+
+/* ==========================================================================
+   SELECT
+   ========================================================================== */
+
+.form-group select {
+
+    cursor: pointer;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    -moz-appearance: none;
+
+    background-image:
+
+        linear-gradient(45deg, transparent 50%, var(--trip-primary) 50%),
+
+        linear-gradient(135deg, var(--trip-primary) 50%, transparent 50%);
+
+    background-position:
+
+        calc(100% - 22px) calc(50% - 3px),
+
+        calc(100% - 16px) calc(50% - 3px);
+
+    background-size:
+
+        6px 6px,
+
+        6px 6px;
+
+    background-repeat: no-repeat;
+
+    padding-right: 48px;
+
+}
+
+/* ==========================================================================
+   TEXTAREA
+   ========================================================================== */
+
+.form-group textarea {
+
+    resize: vertical;
+
+    min-height: 130px;
+
+    line-height: 1.7;
+
+}
+
+/* ==========================================================================
+   FOCUS
+   ========================================================================== */
+
+.form-group input:focus,
+
+.form-group select:focus,
+
+.form-group textarea:focus {
+
+    border-color: var(--trip-primary);
+
+    box-shadow:
+
+        0 0 0 4px rgba(21,101,192,.12);
+
+    background: #FFFFFF;
+
+}
+
+/* ==========================================================================
+   CHAMPS DÉSACTIVÉS
+   ========================================================================== */
+
+.form-group input:disabled,
+
+.form-group select:disabled,
+
+.form-group textarea:disabled {
+
+    cursor: not-allowed;
+
+    opacity: .70;
+
+    background: #F8FAFC;
+
+}
+
+/* ==========================================================================
+   MESSAGE D'ERREUR
+   ========================================================================== */
+
+.form-error {
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 16px 18px;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(220,38,38,.20);
+
+    background: rgba(220,38,38,.08);
+
+    color: var(--trip-danger);
+
+    font-size: .95rem;
+
+    font-weight: 500;
+
+    line-height: 1.6;
+
+    animation: tripFadeIn .25s ease;
+
+}
+
+/* ==========================================================================
+   ZONE DES ACTIONS
+   ========================================================================== */
+
+.create-trip-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 12px;
+
+}
+
+/* ==========================================================================
+   BOUTON ANNULER
+   ========================================================================== */
+
+.secondary-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 150px;
+
+    height: 52px;
+
+    padding: 0 24px;
+
+    border: 1px solid var(--trip-border);
+
+    border-radius: 14px;
+
+    background: var(--trip-surface);
+
+    color: var(--trip-text);
+
+    font-size: .95rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+
+}
+
+.secondary-button:hover {
+
+    transform: translateY(-2px);
+
+    border-color: var(--trip-primary);
+
+    background: #F7FAFF;
+
+    box-shadow: 0 10px 25px rgba(21,101,192,.10);
+
+}
+
+.secondary-button:active {
+
+    transform: translateY(0);
+
+}
+
+/* ==========================================================================
+   BOUTON PUBLIER
+   ========================================================================== */
+
+.primary-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    min-width: 240px;
+
+    height: 54px;
+
+    padding: 0 28px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    color: #FFFFFF;
+
+    background: linear-gradient(
+        135deg,
+        var(--trip-primary),
+        var(--trip-primary-light)
+    );
+
+    box-shadow:
+
+        0 16px 35px rgba(21,101,192,.25);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        filter .25s ease;
+
+}
+
+.primary-button:hover {
+
+    transform: translateY(-3px);
+
+    filter: brightness(1.03);
+
+    box-shadow:
+
+        0 22px 45px rgba(21,101,192,.35);
+
+}
+
+.primary-button:active {
+
+    transform: translateY(-1px);
+
+}
+
+.primary-button:focus-visible,
+
+.secondary-button:focus-visible {
+
+    outline: 3px solid rgba(21,101,192,.25);
+
+    outline-offset: 3px;
+
+}
+
+/* ==========================================================================
+   ÉTAT DÉSACTIVÉ
+   ========================================================================== */
+
+.primary-button:disabled,
+
+.secondary-button:disabled {
+
+    cursor: not-allowed;
+
+    opacity: .65;
+
+    transform: none;
+
+    box-shadow: none;
+
+}
+
+/* ==========================================================================
+   CHARGEMENT
+   ========================================================================== */
+
+.primary-button:disabled {
+
+    background: linear-gradient(
+        135deg,
+        #90CAF9,
+        #64B5F6
+    );
+
+}
+
+/* ==========================================================================
+   ANIMATION
+   ========================================================================== */
+
+@keyframes tripFadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(8px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* ==========================================================================
+   MESSAGE D'ERREUR
+   ========================================================================== */
+
+.form-error {
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 16px 18px;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(220,38,38,.20);
+
+    background: rgba(220,38,38,.08);
+
+    color: var(--trip-danger);
+
+    font-size: .95rem;
+
+    font-weight: 500;
+
+    line-height: 1.6;
+
+    animation: tripFadeIn .25s ease;
+
+}
+
+/* ==========================================================================
+   ZONE DES ACTIONS
+   ========================================================================== */
+
+.create-trip-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 12px;
+
+}
+
+/* ==========================================================================
+   BOUTON ANNULER
+   ========================================================================== */
+
+.secondary-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 150px;
+
+    height: 52px;
+
+    padding: 0 24px;
+
+    border: 1px solid var(--trip-border);
+
+    border-radius: 14px;
+
+    background: var(--trip-surface);
+
+    color: var(--trip-text);
+
+    font-size: .95rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+
+}
+
+.secondary-button:hover {
+
+    transform: translateY(-2px);
+
+    border-color: var(--trip-primary);
+
+    background: #F7FAFF;
+
+    box-shadow: 0 10px 25px rgba(21,101,192,.10);
+
+}
+
+.secondary-button:active {
+
+    transform: translateY(0);
+
+}
+
+/* ==========================================================================
+   BOUTON PUBLIER
+   ========================================================================== */
+
+.primary-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    min-width: 240px;
+
+    height: 54px;
+
+    padding: 0 28px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    color: #FFFFFF;
+
+    background: linear-gradient(
+        135deg,
+        var(--trip-primary),
+        var(--trip-primary-light)
+    );
+
+    box-shadow:
+
+        0 16px 35px rgba(21,101,192,.25);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        filter .25s ease;
+
+}
+
+.primary-button:hover {
+
+    transform: translateY(-3px);
+
+    filter: brightness(1.03);
+
+    box-shadow:
+
+        0 22px 45px rgba(21,101,192,.35);
+
+}
+
+.primary-button:active {
+
+    transform: translateY(-1px);
+
+}
+
+.primary-button:focus-visible,
+
+.secondary-button:focus-visible {
+
+    outline: 3px solid rgba(21,101,192,.25);
+
+    outline-offset: 3px;
+
+}
+
+/* ==========================================================================
+   ÉTAT DÉSACTIVÉ
+   ========================================================================== */
+
+.primary-button:disabled,
+
+.secondary-button:disabled {
+
+    cursor: not-allowed;
+
+    opacity: .65;
+
+    transform: none;
+
+    box-shadow: none;
+
+}
+
+/* ==========================================================================
+   CHARGEMENT
+   ========================================================================== */
+
+.primary-button:disabled {
+
+    background: linear-gradient(
+        135deg,
+        #90CAF9,
+        #64B5F6
+    );
+
+}
+
+/* ==========================================================================
+   ANIMATION
+   ========================================================================== */
+
+@keyframes tripFadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(8px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+

@@ -1,0 +1,735 @@
+/******************************************************************************
+==============================================================================
+BabiGO
+TripCard.css
+==============================================================================
+*/
+
+/* ==========================================================================
+   CARTE
+   ========================================================================== */
+
+.trip-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+    background: #FFFFFF;
+
+    border: 1px solid rgba(15,23,42,.06);
+
+    border-radius: 22px;
+
+    padding: 22px;
+
+    box-shadow:
+
+        0 10px 30px rgba(15,23,42,.06);
+
+    transition:
+
+        transform .25s ease,
+
+        box-shadow .25s ease,
+
+        border-color .25s ease;
+
+    overflow: hidden;
+
+    position: relative;
+
+}
+
+.trip-card:hover {
+
+    transform: translateY(-4px);
+
+    border-color: rgba(21,101,192,.20);
+
+    box-shadow:
+
+        0 18px 40px rgba(15,23,42,.10);
+
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.trip-card-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+}
+
+.trip-route {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+}
+
+.trip-city {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    color: #16324F;
+
+}
+
+.trip-city svg {
+
+    color: #1565C0;
+
+}
+
+.trip-route-arrow {
+
+    font-size: 1.25rem;
+
+    font-weight: bold;
+
+    color: #64748B;
+
+}
+
+/* ==========================================================================
+   BADGE DE STATUT
+   ========================================================================== */
+
+.trip-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: .82rem;
+
+    font-weight: 700;
+
+    letter-spacing: .3px;
+
+    white-space: nowrap;
+
+    border: 1px solid transparent;
+
+}
+
+/* ---------- Publié ---------- */
+
+.trip-status.published {
+
+    background: rgba(34,197,94,.12);
+
+    color: #15803D;
+
+    border-color: rgba(34,197,94,.18);
+
+}
+
+/* ---------- Terminé ---------- */
+
+.trip-status.completed {
+
+    background: rgba(37,99,235,.10);
+
+    color: #1D4ED8;
+
+    border-color: rgba(37,99,235,.18);
+
+}
+
+/* ---------- Annulé ---------- */
+
+.trip-status.cancelled {
+
+    background: rgba(239,68,68,.12);
+
+    color: #DC2626;
+
+    border-color: rgba(239,68,68,.18);
+
+}
+
+/* ==========================================================================
+   CONTENU DE LA CARTE
+   ========================================================================== */
+
+.trip-card-body {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px 20px;
+
+}
+
+/* ==========================================================================
+   LIGNE D'INFORMATION
+   ========================================================================== */
+
+.trip-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 42px;
+
+    color: #334155;
+
+    font-size: .95rem;
+
+    line-height: 1.5;
+
+}
+
+.trip-info svg {
+
+    flex-shrink: 0;
+
+    font-size: 1rem;
+
+    color: #1565C0;
+
+}
+
+.trip-info span {
+
+    flex: 1;
+
+    word-break: break-word;
+
+}
+
+/* ==========================================================================
+   INFORMATIONS COMPLÉMENTAIRES
+   ========================================================================== */
+
+.trip-card-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid rgba(15,23,42,.08);
+
+}
+
+/* ==========================================================================
+   DESCRIPTION
+   ========================================================================== */
+
+.trip-description {
+
+    margin-top: 6px;
+
+    padding: 16px 18px;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(21,101,192,.05),
+        rgba(21,101,192,.02)
+    );
+
+    border: 1px solid rgba(21,101,192,.08);
+
+}
+
+.trip-description strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: .92rem;
+
+    font-weight: 700;
+
+    color: #16324F;
+
+}
+
+.trip-description p {
+
+    margin: 0;
+
+    color: #475569;
+
+    line-height: 1.7;
+
+    font-size: .92rem;
+
+    white-space: pre-line;
+
+}
+
+/* ==========================================================================
+   MISE EN VALEUR DU PRIX
+   ========================================================================== */
+
+.trip-card-details .trip-info:first-child {
+
+    padding: 14px 16px;
+
+    border-radius: 14px;
+
+    background: rgba(21,101,192,.06);
+
+    border: 1px solid rgba(21,101,192,.10);
+
+}
+
+.trip-card-details .trip-info:first-child svg {
+
+    font-size: 1.15rem;
+
+    color: #1565C0;
+
+}
+
+.trip-card-details .trip-info:first-child span {
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    color: #1565C0;
+
+}
+
+/* ==========================================================================
+   EFFET AU SURVOL DES INFORMATIONS
+   ========================================================================== */
+
+.trip-info {
+
+    transition:
+
+        background-color .20s ease,
+
+        transform .20s ease;
+
+}
+
+.trip-info:hover {
+
+    background: rgba(15,23,42,.025);
+
+    border-radius: 12px;
+
+    transform: translateX(2px);
+
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.trip-card-footer {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 6px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(15,23,42,.08);
+
+}
+
+/* ==========================================================================
+   BOUTON D'ACTION
+   ========================================================================== */
+
+.trip-action-button {
+
+    flex: 1;
+
+    min-width: 130px;
+
+    height: 46px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    font-size: .92rem;
+
+    font-weight: 600;
+
+    transition:
+        all .25s ease;
+
+}
+
+.trip-action-button svg {
+
+    font-size: 1rem;
+
+}
+
+/* ==========================================================================
+   MODIFIER
+   ========================================================================== */
+
+.trip-action-button.edit {
+
+    background: rgba(21,101,192,.08);
+
+    color: #1565C0;
+
+}
+
+.trip-action-button.edit:hover {
+
+    background: rgba(21,101,192,.15);
+
+    transform: translateY(-2px);
+
+}
+
+/* ==========================================================================
+   TERMINER
+   ========================================================================== */
+
+.trip-action-button.success {
+
+    background: rgba(34,197,94,.10);
+
+    color: #15803D;
+
+}
+
+.trip-action-button.success:hover {
+
+    background: rgba(34,197,94,.18);
+
+    transform: translateY(-2px);
+
+}
+
+/* ==========================================================================
+   ANNULER
+   ========================================================================== */
+
+.trip-action-button.warning {
+
+    background: rgba(245,158,11,.12);
+
+    color: #B45309;
+
+}
+
+.trip-action-button.warning:hover {
+
+    background: rgba(245,158,11,.20);
+
+    transform: translateY(-2px);
+
+}
+
+/* ==========================================================================
+   SUPPRIMER
+   ========================================================================== */
+
+.trip-action-button.danger {
+
+    background: rgba(239,68,68,.10);
+
+    color: #DC2626;
+
+}
+
+.trip-action-button.danger:hover {
+
+    background: rgba(239,68,68,.18);
+
+    transform: translateY(-2px);
+
+}
+
+/* ==========================================================================
+   EFFET AU CLIC
+   ========================================================================== */
+
+.trip-action-button:active {
+
+    transform: scale(.97);
+
+}
+
+/* ==========================================================================
+   RESPONSIVE TABLETTE
+   ========================================================================== */
+
+@media (max-width: 992px) {
+
+    .trip-card {
+
+        padding: 20px;
+
+    }
+
+    .trip-card-body {
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+
+    }
+
+}
+
+/* ==========================================================================
+   RESPONSIVE MOBILE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    .trip-card {
+
+        padding: 18px;
+
+        border-radius: 18px;
+
+        gap: 18px;
+
+    }
+
+    .trip-card-header {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 14px;
+
+    }
+
+    .trip-route {
+
+        justify-content: flex-start;
+
+    }
+
+    .trip-status {
+
+        align-self: flex-start;
+
+    }
+
+    .trip-card-footer {
+
+        flex-direction: column;
+
+    }
+
+    .trip-action-button {
+
+        width: 100%;
+
+        min-width: unset;
+
+    }
+
+}
+
+/* ==========================================================================
+   PETITS SMARTPHONES
+   ========================================================================== */
+
+@media (max-width: 480px) {
+
+    .trip-card {
+
+        padding: 16px;
+
+    }
+
+    .trip-city {
+
+        font-size: .92rem;
+
+    }
+
+    .trip-route-arrow {
+
+        font-size: 1rem;
+
+    }
+
+    .trip-info {
+
+        font-size: .90rem;
+
+    }
+
+    .trip-description {
+
+        padding: 14px;
+
+    }
+
+    .trip-action-button {
+
+        height: 44px;
+
+        font-size: .90rem;
+
+    }
+
+}
+
+/* ==========================================================================
+   MODE SOMBRE
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+
+    .trip-card {
+
+        background: #16202A;
+
+        border-color: rgba(255,255,255,.08);
+
+        box-shadow:
+
+            0 12px 30px rgba(0,0,0,.30);
+
+    }
+
+    .trip-card:hover {
+
+        border-color: rgba(59,130,246,.35);
+
+    }
+
+    .trip-city {
+
+        color: #F8FAFC;
+
+    }
+
+    .trip-route-arrow {
+
+        color: #94A3B8;
+
+    }
+
+    .trip-info {
+
+        color: #E2E8F0;
+
+    }
+
+    .trip-description {
+
+        background: rgba(59,130,246,.08);
+
+        border-color: rgba(59,130,246,.12);
+
+    }
+
+    .trip-description strong {
+
+        color: #F8FAFC;
+
+    }
+
+    .trip-description p {
+
+        color: #CBD5E1;
+
+    }
+
+    .trip-card-details,
+
+    .trip-card-footer {
+
+        border-top-color: rgba(255,255,255,.08);
+
+    }
+
+}
+
+/* ==========================================================================
+   ANIMATION D'APPARITION
+   ========================================================================== */
+
+@keyframes tripCardFade {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(18px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+.trip-card {
+
+    animation: tripCardFade .35s ease;
+
+}

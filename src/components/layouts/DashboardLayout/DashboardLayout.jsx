@@ -1,9 +1,15 @@
-import { useState } from "react";
+import React, {
+
+    useState,
+
+} from "react";
 
 import Sidebar from "../SideBar/Sidebar";
 import TopBar from "../TopBar/TopBar";
 
 import "./dashboard.css";
+
+import useAuth from "../../../hooks/useAuth";
 
 export default function DashboardLayout({
 
@@ -13,6 +19,18 @@ export default function DashboardLayout({
 
 }) {
 
+    /* =======================================================================
+        AUTH
+    ======================================================================= */
+
+    const {
+    
+        user,
+
+        loading,
+
+    } = useAuth();
+    
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     function toggleSidebar() {
@@ -41,7 +59,12 @@ export default function DashboardLayout({
                 }
             >
 
-                <Sidebar />
+                <Sidebar
+
+                    user={user}
+                    loading={loading}
+                
+                />
 
             </div>
 

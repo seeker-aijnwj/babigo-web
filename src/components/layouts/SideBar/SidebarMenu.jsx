@@ -1,88 +1,145 @@
+/******************************************************************************
+==============================================================================
+BabiGO
+SidebarMenu.jsx
+==============================================================================
+
+Navigation principale du Back Office.
+
+Le composant est entièrement piloté par la configuration
+MENU_CONFIGURATION.
+
+Aucun menu n'est codé en dur dans le JSX.
+
+==============================================================================
+*/
+
 import { NavLink } from "react-router-dom";
+
+import useAuth from "../../../hooks/useAuth";
+
 import "../DashboardLayout/dashboard.css";
 
-import {
-    FiHome,
-    FiUsers,
-    FiMap,
-    FiTruck,
-    FiCreditCard,
-    FiHeadphones,
-    FiTrendingUp,
-    FiSettings,
-    FiUser
-} from "react-icons/fi";
+/* ============================================================================
+   CONFIGURATION
+============================================================================ */
+import { MENU_CONFIGURATION } from "../../../config/sidebarMenu";
 
-const menus = [
-
-    {
-        label: "Tableau de bord",
-        path: "/",
-        icon: FiHome
-    },
-
-    {
-        label: "Utilisateurs",
-        path: "/users",
-        icon: FiUsers
-    },
-
-    {
-        label: "Trajets",
-        path: "/trips",
-        icon: FiMap
-    },
-
-    {
-        label: "Véhicules",
-        path: "/vehicles",
-        icon: FiTruck
-    },
-
-    {
-        label: "Paiements",
-        path: "/payments",
-        icon: FiCreditCard
-    },
-
-    {
-        label: "Support",
-        path: "/support",
-        icon: FiHeadphones,
-        badge: 3
-    },
-
-    {
-        label: "Investisseurs",
-        path: "/investors",
-        icon: FiTrendingUp
-    },
-
-    {
-        label: "Mon profil",
-        path: "/account",
-        icon: FiUser
-    },
-
-    {
-        label: "Paramètres",
-        path: "/settings",
-        icon: FiSettings
-    }
-
-];
+/* ============================================================================
+   COMPOSANT
+============================================================================ */
 
 export default function SidebarMenu() {
+
+    /* ========================================================================
+       AUTH
+    ======================================================================== */
+
+    const {
+
+        user,
+
+        loading,
+
+    } = useAuth();
+
+    /* ========================================================================
+       ROLE
+    ======================================================================== */
+
+    const role = user?.role;
+
+    /* ========================================================================
+       MENUS VISIBLES
+    ======================================================================== */
+
+    const visibleMenus = MENU_CONFIGURATION.filter(
+
+        (menu) => {
+
+            if (!role) {
+
+                return false;
+
+            }
+
+            return menu.roles.includes(role);
+
+        }
+
+    );
+
+    /* ========================================================================
+       CHARGEMENT
+    ======================================================================== */
+
+    if (loading) {
+
+        return (
+
+            <div className="sidebar-menu-container">
+
+                <nav className="sidebar-menu">
+
+                    <div className="sidebar-loading">
+
+                        Chargement...
+
+                    </div>
+
+                </nav>
+
+            </div>
+
+        );
+
+    }
+
+    /* ========================================================================
+       AUCUN ROLE
+    ======================================================================== */
+
+    if (!role) {
+
+        return (
+
+            <div className="sidebar-menu-container">
+
+                <nav className="sidebar-menu">
+
+                    <div className="sidebar-loading">
+
+                        Aucun rôle attribué.
+
+                    </div>
+
+                </nav>
+
+            </div>
+
+        );
+
+    }
+
+    /* ========================================================================
+       RENDU
+    ======================================================================== */
 
     return (
 
         <div className="sidebar-menu-container">
 
-            <nav className="sidebar-menu">
+            <nav
+
+                className="sidebar-menu"
+
+                aria-label="Navigation principale"
+
+            >
 
                 {
 
-                    menus.map((menu) => {
+                    visibleMenus.map((menu) => {
 
                         const Icon = menu.icon;
 
@@ -90,7 +147,7 @@ export default function SidebarMenu() {
 
                             <NavLink
 
-                                key={menu.path}
+                                key={menu.id}
 
                                 to={menu.path}
 
@@ -108,23 +165,39 @@ export default function SidebarMenu() {
 
                             >
 
-                                <Icon className="menu-icon" />
+                                <Icon
 
-                                <span>
+                                    className="menu-icon"
+
+                                    aria-hidden="true"
+
+                                />
+
+                                <span className="menu-label">
 
                                     {menu.label}
 
                                 </span>
 
-                                {menu.badge && (
+                                {
 
-                                    <div className="menu-badge">
+                                    menu.badge && (
 
-                                        {menu.badge}
+                                        <span
 
-                                    </div>
+                                            className="menu-badge"
 
-                                )}
+                                            aria-label={`${menu.badge} notifications`}
+
+                                        >
+
+                                            {menu.badge}
+
+                                        </span>
+
+                                    )
+
+                                }
 
                             </NavLink>
 

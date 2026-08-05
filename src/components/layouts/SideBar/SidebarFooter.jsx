@@ -1,29 +1,127 @@
+/******************************************************************************
+==============================================================================
+BabiGO
+SidebarFooter.jsx
+==============================================================================
+
+Affiche les informations de l'utilisateur connecté.
+
+==============================================================================
+*/
+
+import { FiChevronUp, FiUser } from "react-icons/fi";
+import boyAvatar from '../../../assets/images/avatars/boy.jpg';
+import girlAvatar from '../../../assets/images/avatars/girl.jpg';
+
+import useAuth from "../../../hooks/useAuth";
+
 import {
-    FiChevronUp,
-    FiLogOut,
-    FiMoon,
-    FiSettings,
-    FiUser
-} from "react-icons/fi";
+
+    USER_ROLE_LABELS,
+
+} from "../../../components/constants/roles";
 
 import "../DashboardLayout/dashboard.css";
 
 export default function SidebarFooter() {
+
+    /* ========================================================================
+       AUTH
+    ======================================================================== */
+
+    const {
+
+        user,
+
+        loading,
+
+    } = useAuth();
+
+    /* ========================================================================
+       CHARGEMENT
+    ======================================================================== */
+
+    if (loading) {
+
+        return (
+
+            <footer className="sidebar-footer">
+
+                <div className="profile-card loading">
+
+                    Chargement...
+
+                </div>
+
+            </footer>
+
+        );
+
+    }
+
+    /* ========================================================================
+       AUCUN UTILISATEUR
+    ======================================================================== */
+
+    if (!user) {
+
+        return null;
+
+    }
+
+    /* ========================================================================
+       VALEURS
+    ======================================================================== */
+
+    const displayName =
+
+        user.fullName ||
+
+        user.displayName ||
+
+        `${user.nom ?? ""} ${user.prenom ?? ""}`.trim() ||
+
+        "Utilisateur";
+
+    const displayRole =
+
+        USER_ROLE_LABELS[user.role] ||
+
+        user.role ||
+
+        "Utilisateur";
 
     return (
 
         <footer className="sidebar-footer">
 
             <button
+
                 type="button"
+
                 className="profile-card"
+
             >
 
-                <div className="profile-avatar">
+                <div className="workspace-icon">
 
-                    <span>N</span>
+                    {
 
-                    <div className="profile-status"></div>
+                        user.avatar ? (
+
+                            <img
+                                src={user.avatar === "boy" ? boyAvatar : girlAvatar }
+                                alt={displayName.charAt(0).toUpperCase()}
+                                className="workspace-icon"
+                            />
+
+                        ) : (
+
+                            <FiUser />
+
+                        )
+
+                    }
 
                 </div>
 
@@ -31,63 +129,27 @@ export default function SidebarFooter() {
 
                     <div className="profile-name">
 
-                        Nincekon YORO
+                        {displayName}
 
                     </div>
 
                     <div className="profile-role">
 
-                        Administrateur
+                        {displayRole}
 
                     </div>
 
                     <div className="profile-email">
 
-                        admin@babigo.app
+                        {user.email}
 
                     </div>
 
                 </div>
 
-                <FiChevronUp className="profile-chevron"/>
+                <FiChevronUp className="profile-chevron" />
 
             </button>
-
-            <nav className="profile-menu">
-
-                <button className="profile-action">
-
-                    <FiUser />
-
-                    <span>Mon profil</span>
-
-                </button>
-
-                <button className="profile-action">
-
-                    <FiSettings />
-
-                    <span>Préférences</span>
-
-                </button>
-
-                <button className="profile-action">
-
-                    <FiMoon />
-
-                    <span>Mode sombre</span>
-
-                </button>
-
-                <button className="profile-action logout">
-
-                    <FiLogOut />
-
-                    <span>Déconnexion</span>
-
-                </button>
-
-            </nav>
 
         </footer>
 

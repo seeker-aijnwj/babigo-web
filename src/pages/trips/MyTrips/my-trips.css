@@ -1,0 +1,576 @@
+/******************************************************************************
+==============================================================================
+BabiGO
+MyTrips.css
+==============================================================================
+*/
+
+/* ==========================================================================
+   PAGE
+   ========================================================================== */
+
+.my-trips-page {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 28px;
+
+    padding: 32px;
+
+    animation: fadeMyTrips .35s ease;
+
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.my-trips-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 24px;
+
+    flex-wrap: wrap;
+
+}
+
+.my-trips-header h1 {
+
+    margin: 0;
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+    color: #16324F;
+
+}
+
+.my-trips-header p {
+
+    margin-top: 8px;
+
+    color: #64748B;
+
+    font-size: .97rem;
+
+    line-height: 1.6;
+
+}
+
+/* ==========================================================================
+   BOUTON NOUVEAU TRAJET
+   ========================================================================== */
+
+.new-trip-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 14px 22px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    background: linear-gradient(
+        135deg,
+        #1565C0,
+        #1976D2
+    );
+
+    color: white;
+
+    font-weight: 600;
+
+    transition: .25s;
+
+    box-shadow:
+
+        0 12px 30px rgba(21,101,192,.18);
+
+}
+
+.new-trip-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+
+        0 18px 36px rgba(21,101,192,.28);
+
+}
+
+.new-trip-button svg {
+
+    font-size: 1.1rem;
+
+}
+
+/* ==========================================================================
+   BARRE DE RECHERCHE
+   ========================================================================== */
+
+.my-trips-search {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    background: #FFFFFF;
+
+    border: 1px solid rgba(15, 23, 42, .08);
+
+    border-radius: 18px;
+
+    padding: 16px 20px;
+
+    box-shadow:
+
+        0 8px 24px rgba(15, 23, 42, .05);
+
+    transition:
+
+        border-color .25s ease,
+
+        box-shadow .25s ease,
+
+        transform .25s ease;
+
+}
+
+.my-trips-search:hover {
+
+    border-color: rgba(21, 101, 192, .22);
+
+}
+
+.my-trips-search:focus-within {
+
+    border-color: #1565C0;
+
+    box-shadow:
+
+        0 0 0 4px rgba(21,101,192,.10),
+
+        0 12px 30px rgba(21,101,192,.12);
+
+    transform: translateY(-1px);
+
+}
+
+.my-trips-search svg {
+
+    flex-shrink: 0;
+
+    font-size: 1.2rem;
+
+    color: #64748B;
+
+    transition: color .25s ease;
+
+}
+
+.my-trips-search:focus-within svg {
+
+    color: #1565C0;
+
+}
+
+.my-trips-search input {
+
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 1rem;
+
+    color: #16324F;
+
+    font-weight: 500;
+
+    font-family: inherit;
+
+}
+
+.my-trips-search input::placeholder {
+
+    color: #94A3B8;
+
+    font-weight: 400;
+
+}
+
+/* ==========================================================================
+   ETAT DE CHARGEMENT
+   ========================================================================== */
+
+.loading-trips {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 220px;
+
+    border-radius: 20px;
+
+    background: #FFFFFF;
+
+    border: 1px solid rgba(15,23,42,.06);
+
+    color: #64748B;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    box-shadow:
+
+        0 10px 24px rgba(15,23,42,.05);
+
+}
+
+/* ==========================================================================
+   GRILLE DES TRAJETS
+   ========================================================================== */
+
+.trips-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+
+    gap: 24px;
+
+    align-items: start;
+
+}
+
+/* ==========================================================================
+   RESPONSIVE TABLETTE
+   ========================================================================== */
+
+@media (max-width: 992px) {
+
+    .my-trips-page {
+
+        padding: 24px;
+
+        gap: 24px;
+
+    }
+
+    .my-trips-header {
+
+        align-items: flex-start;
+
+    }
+
+    .my-trips-header h1 {
+
+        font-size: 1.75rem;
+
+    }
+
+    .trips-grid {
+
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+    }
+
+}
+
+/* ==========================================================================
+   RESPONSIVE MOBILE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    .my-trips-page {
+
+        padding: 18px 16px 32px;
+
+        gap: 20px;
+
+    }
+
+    .my-trips-header {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 18px;
+
+    }
+
+    .my-trips-header h1 {
+
+        font-size: 1.5rem;
+
+    }
+
+    .my-trips-header p {
+
+        font-size: .92rem;
+
+    }
+
+    .new-trip-button {
+
+        width: 100%;
+
+        justify-content: center;
+
+    }
+
+    .my-trips-search {
+
+        padding: 14px 16px;
+
+        border-radius: 16px;
+
+    }
+
+    .my-trips-search input {
+
+        font-size: .95rem;
+
+    }
+
+    .trips-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+    }
+
+}
+
+/* ==========================================================================
+   PETITS SMARTPHONES
+   ========================================================================== */
+
+@media (max-width: 480px) {
+
+    .my-trips-page {
+
+        padding: 14px 12px 24px;
+
+    }
+
+    .my-trips-header h1 {
+
+        font-size: 1.3rem;
+
+    }
+
+    .new-trip-button {
+
+        padding: 13px 18px;
+
+        border-radius: 12px;
+
+        font-size: .95rem;
+
+    }
+
+    .my-trips-search {
+
+        padding: 12px 14px;
+
+    }
+
+    .my-trips-search svg {
+
+        font-size: 1rem;
+
+    }
+
+    .loading-trips {
+
+        min-height: 180px;
+
+        font-size: .95rem;
+
+    }
+
+}
+
+/* ==========================================================================
+   MODE SOMBRE
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+
+    .my-trips-page {
+
+        background: #0F172A;
+
+    }
+
+    .my-trips-header h1 {
+
+        color: #F8FAFC;
+
+    }
+
+    .my-trips-header p {
+
+        color: #CBD5E1;
+
+    }
+
+    .my-trips-search {
+
+        background: #16202A;
+
+        border-color: rgba(255,255,255,.08);
+
+        box-shadow:
+
+            0 8px 24px rgba(0,0,0,.25);
+
+    }
+
+    .my-trips-search input {
+
+        color: #F8FAFC;
+
+    }
+
+    .my-trips-search input::placeholder {
+
+        color: #94A3B8;
+
+    }
+
+    .my-trips-search svg {
+
+        color: #94A3B8;
+
+    }
+
+    .my-trips-search:focus-within {
+
+        border-color: #3B82F6;
+
+        box-shadow:
+
+            0 0 0 4px rgba(59,130,246,.15),
+
+            0 12px 30px rgba(0,0,0,.35);
+
+    }
+
+    .loading-trips {
+
+        background: #16202A;
+
+        border-color: rgba(255,255,255,.08);
+
+        color: #E2E8F0;
+
+    }
+
+}
+
+/* ==========================================================================
+   BARRE DE DÉFILEMENT
+   ========================================================================== */
+
+.my-trips-page::-webkit-scrollbar {
+
+    width: 10px;
+
+}
+
+.my-trips-page::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+.my-trips-page::-webkit-scrollbar-thumb {
+
+    background: rgba(21,101,192,.35);
+
+    border-radius: 999px;
+
+}
+
+.my-trips-page::-webkit-scrollbar-thumb:hover {
+
+    background: rgba(21,101,192,.60);
+
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+@keyframes fadeMyTrips {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(18px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+.trips-grid > * {
+
+    animation: fadeMyTrips .35s ease;
+
+}
+
+/* ==========================================================================
+   TRANSITIONS GLOBALES
+   ========================================================================== */
+
+.my-trips-page * {
+
+    transition:
+
+        color .2s ease,
+
+        background-color .2s ease,
+
+        border-color .2s ease,
+
+        box-shadow .2s ease;
+
+}

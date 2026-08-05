@@ -20,6 +20,8 @@ import UsersPage from "../pages/UsersPage";
 */
 
 import DashboardPage from "../pages/DashboardPage";
+import MyTrips from "../pages/trips/MyTrips/MyTrips";
+import CreateTrip from "../pages/trips/CreateTripPage";
 import TripsPage from "../pages/trips/TripsPage";
 import VehiclesPage from "../pages/VehiclesPage";
 import PaymentsPage from "../pages/PaymentsPage";
@@ -81,6 +83,22 @@ export default function AppRoutes() {
                     path="/users"
 
                     element={<UsersPage />}
+
+                />
+
+                <Route
+
+                    path="/my-trips"
+
+                    element={<MyTrips />}
+
+                />
+
+                <Route
+
+                    path="/create-trip"
+
+                    element={<CreateTrip />}
 
                 />
 

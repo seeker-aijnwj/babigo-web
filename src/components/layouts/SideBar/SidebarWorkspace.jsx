@@ -42,13 +42,13 @@ export default function SidebarWorkspace() {
 
                     <span className="workspace-name">
 
-                        Afrique de l'Ouest
+                        Abidjan
 
                     </span>
 
                     <span className="workspace-subtitle">
 
-                        Région active
+                        Ville active
 
                     </span>
 
