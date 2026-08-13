@@ -1,15 +1,20 @@
 {
   "files": {
-    "main.css": "/babigo-web/static/css/main.0d051fa9.css",
-    "main.js": "/babigo-web/static/js/main.32ae22e5.js",
+    "main.css": "/babigo-web/static/css/main.33752879.css",
+    "main.js": "/babigo-web/static/js/main.6310868d.js",
+    "static/media/image-1.jpg": "/babigo-web/static/media/image-1.452601aac3ef347b93a0.jpg",
+    "static/media/image-2.jpg": "/babigo-web/static/media/image-2.25b0068a2d2f49a621a0.jpg",
+    "static/media/image-3.jpg": "/babigo-web/static/media/image-3.cbe008abf6df36630860.jpg",
+    "static/media/image-4.jpg": "/babigo-web/static/media/image-4.d46d7eb60d4c8efc05d4.jpg",
     "static/media/girl.jpg": "/babigo-web/static/media/girl.a2d417a2eba607b019c6.jpg",
     "static/media/boy.jpg": "/babigo-web/static/media/boy.9e4076ee8a56f2603d3a.jpg",
+    "static/media/Icon-192.png": "/babigo-web/static/media/Icon-192.67a0f51b35b74fef84e4.png",
     "index.html": "/babigo-web/index.html",
-    "main.0d051fa9.css.map": "/babigo-web/static/css/main.0d051fa9.css.map",
-    "main.32ae22e5.js.map": "/babigo-web/static/js/main.32ae22e5.js.map"
+    "main.33752879.css.map": "/babigo-web/static/css/main.33752879.css.map",
+    "main.6310868d.js.map": "/babigo-web/static/js/main.6310868d.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d051fa9.css",
-    "static/js/main.32ae22e5.js"
+    "static/css/main.33752879.css",
+    "static/js/main.6310868d.js"
   ]
 }
